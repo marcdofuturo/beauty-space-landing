@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucya IA × Beauty Space Estética</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--rose:#C4787A;--rose-light:#F2E0E0;--rose-dark:#8B4A4C;
+--gold:#B8955A;--gold-light:#F5EFE3;
+--cream:#FBF8F4;--cream-dark:#F0EBE3;
+--charcoal:#2C2825;--charcoal-light:#4A4542;
+--sage:#8BA88B;--sage-light:#E8F0E8;
+--white:#FFFFFF;
+--font-display:'Cormorant Garamond',serif;
+--font-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--charcoal);background:var(--cream);overflow-x:hidden;line-height:1.7}
+::selection{background:var(--rose-light);color:var(--rose-dark)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(160deg,var(--cream) 0%,var(--rose-light) 50%,var(--gold-light) 100%);position:relative;overflow:hidden;padding:2rem}
+.hero::before{content:'';position:absolute;top:-50%;right:-30%;width:80vw;height:80vw;border-radius:50%;background:radial-gradient(circle,rgba(196,120,122,0.08) 0%,transparent 70%);animation:float 20s ease-in-out infinite}
+.hero::after{content:'';position:absolute;bottom:-40%;left:-20%;width:60vw;height:60vw;border-radius:50%;background:radial-gradient(circle,rgba(184,149,90,0.06) 0%,transparent 70%);animation:float 25s ease-in-out infinite reverse}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-20px)}}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);border:1px solid rgba(196,120,122,0.2);border-radius:100px;padding:8px 20px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--rose-dark);margin-bottom:2rem;animation:fadeUp .8s ease both}
+.hero-badge span{width:8px;height:8px;border-radius:50%;background:var(--sage);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5rem);font-weight:300;line-height:1.1;color:var(--charcoal);margin-bottom:1.5rem;animation:fadeUp .8s ease .1s both}
+.hero h1 em{font-style:italic;color:var(--rose);font-weight:400}
+.hero p{font-size:clamp(1rem,2vw,1.2rem);color:var(--charcoal-light);max-width:600px;margin:0 auto 2.5rem;font-weight:300;animation:fadeUp .8s ease .2s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--rose);color:var(--white);padding:16px 36px;border-radius:100px;text-decoration:none;font-size:15px;font-weight:500;letter-spacing:.5px;transition:all .3s;animation:fadeUp .8s ease .3s both;border:none;cursor:pointer}
+.hero-cta:hover{background:var(--rose-dark);transform:translateY(-2px);box-shadow:0 10px 30px rgba(196,120,122,.3)}
+
+/* ANIMATED TEXT */
+.animated-text {
+  background: linear-gradient(to right, var(--rose), var(--gold), var(--rose));
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s linear infinite;
+  font-weight: 400;
+  font-style: italic;
+}
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* SECTIONS */
+section{padding:6rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--rose);margin-bottom:1rem}
+.section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;margin-bottom:1rem}
+.section-subtitle{font-size:1rem;color:var(--charcoal-light);font-weight:300;max-width:600px;margin-bottom:3rem}
+
+/* PROBLEM */
+.problem{background:var(--charcoal);color:var(--white);position:relative}
+.problem .section-label{color:var(--gold)}
+.problem .section-title{color:var(--white)}
+.problem .section-subtitle{color:rgba(255,255,255,.6)}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:3rem}
+.pain-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:2rem;transition:all .3s}
+.pain-card:hover{background:rgba(255,255,255,.08);border-color:rgba(196,120,122,.3)}
+.pain-icon{font-size:2rem;margin-bottom:1rem}
+.pain-card h3{font-family:var(--font-display);font-size:1.3rem;font-weight:400;margin-bottom:.5rem}
+.pain-card p{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.6}
+.pain-stat{text-align:center;padding:2rem}
+.pain-stat .number{font-family:var(--font-display);font-size:3.5rem;font-weight:300;color:var(--rose)}
+.pain-stat .label{font-size:.85rem;color:rgba(255,255,255,.5);margin-top:.5rem}
+
+/* SOLUTION */
+.solution{background:var(--white)}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.feature-card{padding:2rem;border-radius:16px;border:1px solid var(--cream-dark);transition:all .3s}
+.feature-card:hover{border-color:var(--rose-light);box-shadow:0 8px 30px rgba(196,120,122,.08)}
+.feature-num{font-family:var(--font-display);font-size:2.5rem;font-weight:300;color:var(--rose-light);margin-bottom:.5rem}
+.feature-card h3{font-family:var(--font-display);font-size:1.3rem;font-weight:400;margin-bottom:.5rem}
+.feature-card p{font-size:.9rem;color:var(--charcoal-light);line-height:1.6}
+
+/* COMPARISON */
+.comparison{background:var(--cream)}
+.comp-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.05)}
+.comp-table thead{background:var(--charcoal)}
+.comp-table th{padding:1.2rem 1.5rem;color:var(--white);font-weight:500;font-size:.85rem;text-align:left;letter-spacing:.5px}
+.comp-table th:first-child{width:35%}
+.comp-table th.highlight{background:var(--rose-dark);text-align:center}
+.comp-table th:last-child{text-align:center}
+.comp-table td{padding:1rem 1.5rem;border-bottom:1px solid var(--cream-dark);font-size:.9rem;background:var(--white)}
+.comp-table td.highlight{background:var(--rose-light);text-align:center;font-weight:500;color:var(--rose-dark)}
+.comp-table td:last-child{text-align:center;color:var(--charcoal-light)}
+.comp-table tr:last-child td{border-bottom:none}
+.check{color:var(--sage);font-weight:600}
+.cross{color:#ccc}
+
+/* PRICING */
+.pricing{background:var(--white)}
+.price-card{max-width:500px;margin:0 auto;background:linear-gradient(135deg,var(--charcoal) 0%,#3A3532 100%);border-radius:24px;padding:3rem;color:var(--white);text-align:center;position:relative;overflow:hidden}
+.price-card::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(196,120,122,.15) 0%,transparent 70%);border-radius:50%}
+.price-tag{font-family:var(--font-display);font-size:.9rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.price-value{font-family:var(--font-display);font-size:3.5rem;font-weight:300}
+.price-value small{font-size:1.2rem;opacity:.6}
+.price-period{font-size:.85rem;opacity:.5;margin-bottom:2rem}
+.price-features{text-align:left;list-style:none;margin-bottom:2rem}
+.price-features li{padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.9rem;display:flex;align-items:center;gap:10px}
+.price-features li::before{content:'◆';color:var(--rose);font-size:8px}
+.price-cta{display:inline-flex;align-items:center;gap:8px;background:var(--rose);color:var(--white);padding:14px 32px;border-radius:100px;text-decoration:none;font-size:15px;font-weight:500;border:none;cursor:pointer;transition:all .3s}
+.price-cta:hover{background:var(--gold);transform:translateY(-2px)}
+.price-savings{margin-top:2rem;padding:1.5rem;background:rgba(139,168,139,.1);border-radius:12px;text-align:left}
+.price-savings h4{color:var(--sage);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:.5rem}
+.price-savings p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6}
+
+/* CHAT DEMO */
+.demo{background:var(--cream);position:relative}
+.chat-container{max-width:440px;margin:0 auto;background:var(--white);border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.08);overflow:hidden;border:1px solid var(--cream-dark)}
+.chat-header{background:linear-gradient(135deg,#075E54,#128C7E);color:var(--white);padding:1rem 1.5rem;display:flex;align-items:center;gap:12px}
+.chat-avatar{width:42px;height:42px;border-radius:50%;background:var(--rose-light);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:600;color:var(--rose-dark);font-size:16px}
+.chat-header-info h4{font-size:.95rem;font-weight:500}
+.chat-header-info span{font-size:.75rem;opacity:.8}
+.chat-body{height:380px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:8px;background:#E5DDD5 url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4cfc6' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.msg{max-width:82%;padding:8px 12px;border-radius:8px;font-size:.9rem;line-height:1.5;position:relative;animation:msgIn .3s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.msg.bot{background:var(--white);align-self:flex-start;border-top-left-radius:0;box-shadow:0 1px 1px rgba(0,0,0,.05)}
+.msg.user{background:#DCF8C6;align-self:flex-end;border-top-right-radius:0}
+.msg-time{font-size:.65rem;color:#999;text-align:right;margin-top:4px}
+.chat-input{display:flex;gap:8px;padding:10px 12px;background:var(--cream);border-top:1px solid var(--cream-dark)}
+.chat-input input{flex:1;padding:10px 16px;border:1px solid var(--cream-dark);border-radius:100px;font-size:.9rem;font-family:var(--font-body);outline:none;background:var(--white)}
+.chat-input input:focus{border-color:var(--rose)}
+.chat-input button{width:42px;height:42px;border-radius:50%;background:#075E54;color:var(--white);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.chat-input button:hover{background:#128C7E;transform:scale(1.05)}
+.quick-btns{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 10px;background:var(--cream)}
+.quick-btn{padding:6px 14px;border:1px solid var(--cream-dark);border-radius:100px;font-size:.8rem;font-family:var(--font-body);background:var(--white);cursor:pointer;transition:all .2s;color:var(--charcoal)}
+.quick-btn:hover{border-color:var(--rose);color:var(--rose)}
+
+/* ROI */
+.roi{background:var(--white)}
+.roi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.roi-card{background:var(--cream);border-radius:16px;padding:2rem;text-align:center}
+.roi-card .val{font-family:var(--font-display);font-size:2.5rem;font-weight:300;color:var(--rose)}
+.roi-card .desc{font-size:.85rem;color:var(--charcoal-light);margin-top:.3rem}
+
+/* FAQ */
+.faq{background:var(--cream)}
+.faq-item{border-bottom:1px solid var(--cream-dark);padding:1.5rem 0}
+.faq-q{font-family:var(--font-display);font-size:1.2rem;font-weight:400;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq-q::after{content:'+';font-size:1.5rem;color:var(--rose);transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:.9rem;color:var(--charcoal-light);line-height:1.7}
+.faq-item.open .faq-a{max-height:500px;padding-top:1rem}
+
+/* CTA */
+.final-cta{background:linear-gradient(135deg,var(--charcoal) 0%,#3A3532 100%);color:var(--white);text-align:center;padding:6rem 2rem}
+.final-cta .section-title{color:var(--white)}
+.final-cta p{color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 2rem;font-weight:300}
+
+/* FOOTER */
+footer{background:var(--charcoal);color:rgba(255,255,255,.3);text-align:center;padding:2rem;font-size:.8rem}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  section{padding:4rem 1.5rem}
+  .comp-table{font-size:.8rem;display:block;overflow-x:auto}
+  .comp-table th,.comp-table td{padding:.8rem}
+  .price-card{padding:2rem}
+  .chat-body{height:320px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-content">
+  <div class="hero-badge"><span></span> Tecnologia exclusiva</div>
+  <h1>Sua clínica atendendo<br><span class="animated-text">24 horas por dia 7 dias por semana</span></h1>
+  <p>A Lucya é uma assistente de IA que conversa com seus clientes no WhatsApp como uma recepcionista real — informa preços, qualifica leads e avisa você na hora certa.</p>
+  <a href="#demo" class="hero-cta">▶ Testar a Lucya agora</a>
+</div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problema">
+<div class="container">
+  <div class="section-label">O desafio</div>
+  <h2 class="section-title">Você gasta até 3 horas por dia<br>respondendo WhatsApp</h2>
+  <p class="section-subtitle">E mesmo assim, leads escapam porque não foram respondidos rápido o suficiente.</p>
+  <div class="pain-grid">
+    <div class="pain-card reveal">
+      <div class="pain-icon">⏰</div>
+      <h3>Tempo perdido</h3>
+      <p>1 a 3 horas por dia respondendo as mesmas perguntas: "Quanto custa?", "Depilação a laser dói?", "Quais formas de pagamento?"</p>
+    </div>
+    <div class="pain-card reveal">
+      <div class="pain-icon">📱</div>
+      <h3>Leads que esfriam</h3>
+      <p>50 a 100 mensagens por dia. Se demora 30 minutos pra responder, o cliente já foi na concorrente.</p>
+    </div>
+    <div class="pain-card reveal">
+      <div class="pain-icon">🌙</div>
+      <h3>Fora do horário</h3>
+      <p>Cliente manda mensagem às 22h, só é respondido às 9h do dia seguinte. Interesse já esfriou.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem">
+    <div class="pain-stat reveal"><div class="number">78%</div><div class="label">dos leads compram de quem<br>responde primeiro</div></div>
+    <div class="pain-stat reveal"><div class="number">3h</div><div class="label">tempo que você gasta<br>respondendo WhatsApp/dia</div></div>
+    <div class="pain-stat reveal"><div class="number">2.000+</div><div class="label">contatos na sua base<br>que podem ser ativados</div></div>
+  </div>
+</div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution" id="solucao">
+<div class="container">
+  <div class="section-label reveal">A solução</div>
+  <h2 class="section-title reveal">Lucya cuida do atendimento.<br>Você cuida das clientes.</h2>
+  <p class="section-subtitle reveal">Uma assistente inteligente que entende seu negócio, responde com seu tom de voz e te notifica quando realmente importa.</p>
+  <div class="feature-grid">
+    <div class="feature-card reveal">
+      <div class="feature-num">01</div>
+      <h3>Atendimento instantâneo 24/7</h3>
+      <p>Responde em segundos, mesmo às 2h da manhã. Informa preços, explica procedimentos e tira dúvidas com a personalidade da Beauty Space.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-num">02</div>
+      <h3>Qualificação inteligente de leads</h3>
+      <p>Identifica clientes com real interesse, coleta informações e envia pra você um briefing completo: nome, telefone, procedimento desejado e contexto da conversa.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-num">03</div>
+      <h3>Você responde = IA pausa</h3>
+      <p>No instante que você envia uma mensagem manual, a IA para automaticamente. Sem conflito, sem mensagem duplicada. Retoma sozinha após 4 horas.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-num">04</div>
+      <h3>Follow-up automático</h3>
+      <p>Pede avaliação 30 dias após o procedimento, reengaja clientes inativos e dispara campanhas promocionais com throttling anti-ban.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-num">05</div>
+      <h3>Notificação direta no seu WhatsApp</h3>
+      <p>Lead qualificado? Pediu avaliação? Você recebe uma mensagem pessoal com briefing completo pra ligar já sabendo o contexto.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-num">06</div>
+      <h3>Dados e memória por cliente</h3>
+      <p>Cada conversa fica salva. Se o cliente voltar semanas depois, a Lucya lembra o que conversaram e retoma de onde parou.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison" id="comparativo">
+<div class="container">
+  <div class="section-label reveal">Comparativo honesto</div>
+  <h2 class="section-title reveal">Lucya vs. ManyChat Pro</h2>
+  <p class="section-subtitle reveal">Sem inventar nada. Dados reais de funcionalidades e custos.</p>
+  <div class="reveal" style="overflow-x:auto">
+  <table class="comp-table">
+    <thead>
+      <tr><th>Funcionalidade</th><th class="highlight">Lucya IA</th><th>ManyChat Pro</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Conversa natural e contextual</td><td class="highlight"><span class="check">✓</span> IA generativa</td><td><span class="cross">✗</span> Fluxos rígidos</td></tr>
+      <tr><td>Entende áudio e responde em texto</td><td class="highlight"><span class="check">✓</span></td><td><span class="cross">✗</span></td></tr>
+      <tr><td>Atende 24 horas, 7 dias</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td>Memória de conversa por cliente</td><td class="highlight"><span class="check">✓</span> Ilimitada</td><td><span class="cross">✗</span> Apenas tags</td></tr>
+      <tr><td>Human takeover automático</td><td class="highlight"><span class="check">✓</span> Nativo</td><td>Parcial</td></tr>
+      <tr><td>Follow-up e campanhas</td><td class="highlight"><span class="check">✓</span> Incluído</td><td><span class="check">✓</span> +taxa por msg</td></tr>
+      <tr><td>Notificação no WhatsApp pessoal</td><td class="highlight"><span class="check">✓</span></td><td><span class="cross">✗</span></td></tr>
+      <tr><td>Qualificação com briefing</td><td class="highlight"><span class="check">✓</span></td><td><span class="cross">✗</span></td></tr>
+      <tr><td>Personalidade e tom de voz</td><td class="highlight"><span class="check">✓</span> IA treinada</td><td><span class="cross">✗</span> Robótico</td></tr>
+      <tr><td>Custo mensal (1.500 leads)</td><td class="highlight">~R$ 497/mês</td><td>R$ 250-600+</td></tr>
+      <tr><td>Setup e configuração</td><td class="highlight">Incluído</td><td>Você mesmo</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</section>
+
+<!-- CHAT DEMO -->
+<section class="demo" id="demo">
+<div class="container" style="text-align:center">
+  <div class="section-label reveal">Teste agora</div>
+  <h2 class="section-title reveal">Converse com a Lucya da Beauty Space</h2>
+  <p class="section-subtitle reveal" style="margin:0 auto 2rem">Simulação real de como seus clientes serão atendidos. Experimente perguntar sobre preços, procedimentos ou agendar avaliação.</p>
+  <div class="chat-container reveal" id="chatBox">
+    <div class="chat-header">
+      <div class="chat-avatar">BS</div>
+      <div class="chat-header-info">
+        <h4>Beauty Space ✨</h4>
+        <span>Online agora</span>
+      </div>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="msg bot">Olá minhas Divas(os), sejam bem vindos a Beauty Space! 💕<br><br>Sou a Lucya, assistente virtual da Hosana. Como posso te ajudar hoje?<div class="msg-time">Agora</div></div>
+    </div>
+    <div class="quick-btns" id="quickBtns">
+      <button class="quick-btn" onclick="sendQuick('Quanto custa depilação a laser?')">💰 Depilação a laser</button>
+      <button class="quick-btn" onclick="sendQuick('Quero fazer limpeza de pele')">✨ Limpeza de pele</button>
+      <button class="quick-btn" onclick="sendQuick('Quais procedimentos vocês fazem?')">📋 Procedimentos</button>
+      <button class="quick-btn" onclick="sendQuick('Quero agendar uma avaliação')">📅 Agendar avaliação</button>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Digite sua mensagem..." onkeydown="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ROI -->
+<section class="roi" id="roi">
+<div class="container">
+  <div class="section-label reveal">Retorno do investimento</div>
+  <h2 class="section-title reveal">Os números fazem sentido</h2>
+  <p class="section-subtitle reveal">Com ticket médio de R$ 200 a R$ 2.200, basta 1 cliente novo por mês pra pagar a Lucya.</p>
+  <div class="roi-grid">
+    <div class="roi-card reveal">
+      <div class="val">1-3h</div>
+      <div class="desc">liberadas por dia do seu tempo</div>
+    </div>
+    <div class="roi-card reveal">
+      <div class="val">100%</div>
+      <div class="desc">das mensagens respondidas instantaneamente</div>
+    </div>
+    <div class="roi-card reveal">
+      <div class="val">24/7</div>
+      <div class="desc">atendimento sem pausa, férias ou feriado</div>
+    </div>
+    <div class="roi-card reveal">
+      <div class="val">R$ 0,33</div>
+      <div class="desc">custo por lead atendido (1.500 leads)</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="investimento">
+<div class="container" style="text-align:center">
+  <div class="section-label reveal">Investimento</div>
+  <h2 class="section-title reveal">Um valor justo pra transformar<br>seu atendimento</h2>
+  <p class="section-subtitle reveal" style="margin:0 auto 3rem">Sem surpresas. Sem taxas escondidas. Tudo incluído.</p>
+  <div class="price-card reveal">
+    <div class="price-tag">Plano Profissional</div>
+    <div class="price-value">R$ 496<small>,99/mês</small></div>
+    <div class="price-period">Faturado mensalmente • Sem fidelidade</div>
+    <ul class="price-features">
+      <li>Assistente IA no WhatsApp 24/7</li>
+      <li>Até 1.500 leads atendidos/mês</li>
+      <li>Qualificação e briefing automático</li>
+      <li>Notificação no seu WhatsApp pessoal</li>
+      <li>Follow-up automático de avaliação</li>
+      <li>Campanhas promocionais ilimitadas</li>
+      <li>Human takeover nativo</li>
+      <li>Memória de conversa por cliente</li>
+      <li>Suporte direto com a equipe técnica</li>
+      <li>Setup e configuração incluídos</li>
+    </ul>
+    <a href="https://wa.me/5511970416135?text=Oi!%20Quero%20saber%20mais%20sobre%20a%20Lucya%20pra%20minha%20cl%C3%ADnica" class="price-cta" target="_blank">Começar agora →</a>
+    <div class="price-savings">
+      <h4>💡 Economia real</h4>
+      <p>Com seu ticket médio de R$ 200-2.200, basta 1 atendimento convertido por mês pra ter ROI positivo.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="duvidas">
+<div class="container">
+  <div class="section-label reveal">Dúvidas frequentes</div>
+  <h2 class="section-title reveal">Perguntas que você pode ter</h2>
+  <div style="max-width:700px;margin-top:2rem">
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">E se a IA falar algo errado?</div>
+      <div class="faq-a">A Lucya só responde com informações que você autoriza — seus serviços, seus preços, suas regras. Ela nunca inventa procedimentos nem promete resultados. E se não souber algo, ela diz "vou verificar com a Hosana e te retorno". Zero risco.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">E se eu quiser atender pessoalmente?</div>
+      <div class="faq-a">Basta responder a mensagem normalmente. No instante que você envia uma mensagem manual, a IA para automaticamente naquela conversa. Sem conflito. Ela retoma sozinha após 4 horas sem atividade sua.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Preciso mudar de número?</div>
+      <div class="faq-a">Não necessariamente. Podemos configurar com seu número atual ou com um número dedicado para a IA. O ideal é um número próprio da Beauty Space que seus clientes já conhecem.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">E meus dados de clientes?</div>
+      <div class="faq-a">Seus dados são 100% isolados e privados. Ficam em um banco de dados separado, acessível só por você. Nenhum outro cliente do sistema tem acesso. E você pode exportar tudo a qualquer momento.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Quanto tempo pra estar funcionando?</div>
+      <div class="faq-a">Em geral, 3 a 5 dias úteis após aprovação. Isso inclui configuração técnica, treinamento da IA com seus serviços e testes de qualidade.</div>
+    </div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Tem fidelidade ou multa?</div>
+      <div class="faq-a">Nenhuma. O plano é mensal. Se quiser cancelar, cancela. Sem multa, sem burocracia. Acreditamos que você vai ficar porque funciona, não por contrato.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2 class="section-title">Pronta pra transformar seu atendimento?</h2>
+  <p>A Lucya já está configurada com seus serviços e preços. É só ativar.</p>
+  <a href="https://wa.me/5511970416135?text=Oi!%20Quero%20ativar%20a%20Lucya%20na%20Beauty%20Space!" class="hero-cta" target="_blank" style="display:inline-flex">Ativar a Lucya agora →</a>
+</section>
+
+<footer>
+  <p>Lucya IA × Beauty Space Estética — Tecnologia por Tudo do Futuro</p>
+  <p style="margin-top:.5rem;opacity:.5">© 2026 Todos os direitos reservados</p>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+reveals.forEach(r=>observer.observe(r));
+
+// Redirect to WhatsApp function
+function sendToWhatsApp(text) {
+  if (!text) return;
+  const whatsappUrl = `https://wa.me/5511948059297?text=${encodeURIComponent(text)}`;
+  window.open(whatsappUrl, '_blank');
+}
+
+function sendMsg() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  sendToWhatsApp(text);
+  input.value = '';
+}
+
+function sendQuick(text) {
+  sendToWhatsApp(text);
+}
+</script>
+</body>
+</html>
