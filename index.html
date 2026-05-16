@@ -273,7 +273,6 @@ footer{background:var(--charcoal);color:rgba(255,255,255,.3);text-align:center;p
     </thead>
     <tbody>
       <tr><td>Conversa natural e contextual</td><td class="highlight"><span class="check">✓</span> IA generativa</td><td><span class="cross">✗</span> Fluxos rígidos</td></tr>
-      <tr><td>Entende áudio e responde em texto</td><td class="highlight"><span class="check">✓</span></td><td><span class="cross">✗</span></td></tr>
       <tr><td>Atende 24 horas, 7 dias</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
       <tr><td>Memória de conversa por cliente</td><td class="highlight"><span class="check">✓</span> Ilimitada</td><td><span class="cross">✗</span> Apenas tags</td></tr>
       <tr><td>Human takeover automático</td><td class="highlight"><span class="check">✓</span> Nativo</td><td>Parcial</td></tr>
@@ -430,6 +429,7 @@ const reveals=document.querySelectorAll('.reveal');
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
 reveals.forEach(r=>observer.observe(r));
 
+// Redirect to WhatsApp function
 // Chat simulation
 const services={
   'depilação a laser':{price:'R$ 99,99/sessão',desc:'A depilação a laser é um dos nossos tratamentos mais procurados! 💕\n\nO valor é *R$ 99,99 por sessão*. O número de sessões varia conforme a região e tipo de pele — normalmente entre 6 e 10 sessões pra resultado completo.\n\nQuer agendar uma avaliação gratuita? A Hosana pode te explicar direitinho o protocolo ideal pro seu caso! 😊'},
