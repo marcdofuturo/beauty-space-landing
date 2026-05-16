@@ -430,22 +430,80 @@ const reveals=document.querySelectorAll('.reveal');
 const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
 reveals.forEach(r=>observer.observe(r));
 
-// Redirect to WhatsApp function
-function sendToWhatsApp(text) {
-  if (!text) return;
-  const whatsappUrl = `https://wa.me/5511948059297?text=${encodeURIComponent(text)}`;
-  window.open(whatsappUrl, '_blank');
+// Chat simulation
+const services={
+  'depilação a laser':{price:'R$ 99,99/sessão',desc:'A depilação a laser é um dos nossos tratamentos mais procurados! 💕\n\nO valor é *R$ 99,99 por sessão*. O número de sessões varia conforme a região e tipo de pele — normalmente entre 6 e 10 sessões pra resultado completo.\n\nQuer agendar uma avaliação gratuita? A Hosana pode te explicar direitinho o protocolo ideal pro seu caso! 😊'},
+  'limpeza de pele':{price:'R$ 200,00',desc:'Temos duas opções de limpeza que são um arraso! ✨\n\n• *Limpeza de Pele Tradicional* — R$ 200,00\n• *Limpeza de Pele Coreana* — R$ 389,00 (tratamento completo com vários passos)\n\nA limpeza coreana é mais profunda e inclui hidratação intensiva. Qual te interessa mais?'},
+  'procedimentos':{price:'vários',desc:'A Beauty Space oferece vários procedimentos lindos! 💆‍♀️\n\n• *Drenagem Linfática* — R$ 160,00\n• *Drenagem Facial* — R$ 120,00\n• *Criolipólise* — R$ 99,00\n• *Radiofrequência* — R$ 150,00\n• *Limpeza de Pele* — R$ 200,00\n• *Limpeza de Pele Coreana* — R$ 389,00\n• *Depilação a Laser* — R$ 99,99\n• *Booster de Nutrição Facial* — R$ 120,00\n\nAlgum desses te chamou atenção? Posso te contar mais detalhes! 😊'},
+  'avaliação':{price:'gratuita',desc:'Que ótimo que quer agendar! 🥰\n\nA avaliação é *gratuita* e personalizada. A Hosana vai analisar sua pele/corpo e indicar o melhor protocolo pra você.\n\nVou avisar a Hosana agora que você tem interesse! Ela vai te mandar uma mensagem pra agendar o melhor horário. Pode me passar seu nome completo? 💕'},
+  'drenagem':{price:'R$ 160,00 (corpo) / R$ 120,00 (facial)',desc:'Temos drenagem corporal e facial! 💆‍♀️\n\n• *Drenagem Linfática Corporal* — R$ 160,00\n• *Adrenagem Linfática* — R$ 160,00\n• *Drenagem Facial* — R$ 120,00\n\nA drenagem é ótima pra reduzir retenção de líquidos, melhorar circulação e dar aquele up no contorno corporal. Quer saber mais sobre alguma?'},
+  'pagamento':{price:'diversas formas',desc:'Aceitamos várias formas de pagamento! 💳\n\n• Cartão de crédito (até 10x)\n• Pix\n• Dinheiro\n\nE temos uma promoção especial: os *10 primeiros clientes* ganham *10% de desconto*! Vale pra massagem facial e corporal também. 🎉'},
+  'criolipólise':{price:'R$ 99,00',desc:'A criolipólise é um tratamento incrível pra gordura localizada! ❄️\n\nO valor é *R$ 99,00 por sessão*. É um procedimento não invasivo que congela as células de gordura. Normalmente recomendamos de 1 a 3 sessões dependendo da região.\n\nQuer agendar uma avaliação pra ver se é indicado pro seu caso?'},
+  'radiofrequência':{price:'R$ 150,00',desc:'A radiofrequência é maravilhosa pra firmeza da pele! 🔥\n\nO valor é *R$ 150,00 por sessão*. Ela estimula a produção de colágeno, combate flacidez e melhora a textura da pele.\n\nFunciona tanto pro rosto quanto pro corpo. Quer saber mais detalhes?'}
+};
+const fallbacks=[
+  'Que pergunta boa! 😊 Deixa eu verificar com a Hosana pra te dar a informação mais precisa. Enquanto isso, quer conhecer nossos procedimentos mais procurados?',
+  'Entendi! Vou anotar sua dúvida e a Hosana vai te retornar pessoalmente. Ela é super atenciosa e vai te explicar tudo direitinho! 💕\n\nEnquanto isso, posso te ajudar com informações sobre nossos serviços e preços?',
+  'Ótima pergunta! Pra te responder com toda precisão, vou pedir pra Hosana entrar em contato com você. Ela é especialista e vai poder te orientar certinho! 🥰\n\nQuer me contar mais sobre o que está buscando?'
+];
+let fallbackIdx=0;
+
+function getResponse(text){
+  const t=text.toLowerCase();
+  if(t.includes('depila'))return services['depilação a laser'].desc;
+  if(t.includes('limpeza')||t.includes('pele coreana'))return services['limpeza de pele'].desc;
+  if(t.includes('procedimento')||t.includes('serviço')||t.includes('o que vocês')||t.includes('quais'))return services['procedimentos'].desc;
+  if(t.includes('avalia')||t.includes('agenda')||t.includes('horário')||t.includes('marcar'))return services['avaliação'].desc;
+  if(t.includes('drenagem')||t.includes('linfática')||t.includes('linfatica'))return services['drenagem'].desc;
+  if(t.includes('pagamento')||t.includes('cartão')||t.includes('pix')||t.includes('parcela'))return services['pagamento'].desc;
+  if(t.includes('criolipólise')||t.includes('criolipoli')||t.includes('gordura'))return services['criolipólise'].desc;
+  if(t.includes('radiofrequência')||t.includes('radiofrequencia')||t.includes('radio'))return services['radiofrequência'].desc;
+  if(t.includes('dói')||t.includes('doi')||t.includes('dor'))return 'Entendo sua preocupação! 😊\n\nA maioria dos nossos procedimentos é confortável. A depilação a laser, por exemplo, tem uma sensação de leve aquecimento — nada que incomode de verdade. A criolipólise pode ter um desconforto inicial pelo frio, mas passa rapidinho.\n\nCada pessoa sente diferente! Quer agendar uma avaliação pra conversar com a Hosana? Ela explica tudo pessoalmente! 💕';
+  if(t.includes('oi')||t.includes('olá')||t.includes('ola')||t.includes('bom dia')||t.includes('boa tarde')||t.includes('boa noite'))return 'Olá! Tudo bem? 💕 Que bom ter você aqui!\n\nSou a Lucya, assistente da Beauty Space. Posso te ajudar com informações sobre nossos procedimentos, preços ou agendar uma avaliação gratuita!\n\nO que te interessa? 😊';
+  if(t.includes('preço')||t.includes('preco')||t.includes('valor')||t.includes('custa')||t.includes('quanto'))return services['procedimentos'].desc;
+  if(t.includes('desconto')||t.includes('promoção')||t.includes('promocao'))return 'Sim, temos promoção! 🎉\n\nOs *10 primeiros clientes* ganham *10% de desconto* — vale pra massagem facial e corporal!\n\nQuer aproveitar? Posso te ajudar a agendar! 💕';
+  if(t.includes('obrigad')||t.includes('valeu')||t.includes('thanks'))return 'Por nada! 💕 A Beauty Space agradece seu interesse!\n\nSe precisar de qualquer coisa, é só mandar mensagem. Estamos aqui pra você! 🥰\n\nQuer que eu avise a Hosana pra entrar em contato?';
+  const r=fallbacks[fallbackIdx%fallbacks.length];fallbackIdx++;return r;
 }
 
-function sendMsg() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  sendToWhatsApp(text);
-  input.value = '';
+function addMsg(text,isUser){
+  const body=document.getElementById('chatBody');
+  const div=document.createElement('div');
+  div.className='msg '+(isUser?'user':'bot');
+  const now=new Date();
+  const time=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  div.innerHTML=text.replace(/\n/g,'<br>').replace(/\*(.*?)\*/g,'<strong>$1</strong>')+'<div class="msg-time">'+time+'</div>';
+  body.appendChild(div);
+  body.scrollTop=body.scrollHeight;
 }
 
-function sendQuick(text) {
-  sendToWhatsApp(text);
+function showTyping(){
+  const body=document.getElementById('chatBody');
+  const div=document.createElement('div');
+  div.className='typing';div.id='typingIndicator';
+  div.innerHTML='<span></span><span></span><span></span>';
+  body.appendChild(div);
+  body.scrollTop=body.scrollHeight;
+}
+function hideTyping(){const t=document.getElementById('typingIndicator');if(t)t.remove();}
+
+function sendMsg(){
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();
+  if(!text)return;
+  addMsg(text,true);
+  input.value='';
+  showTyping();
+  const delay=800+Math.random()*1200;
+  setTimeout(()=>{hideTyping();addMsg(getResponse(text),false)},delay);
+}
+
+function sendQuick(text){
+  addMsg(text,true);
+  document.getElementById('quickBtns').style.display='none';
+  showTyping();
+  const delay=800+Math.random()*1200;
+  setTimeout(()=>{hideTyping();addMsg(getResponse(text),false)},delay);
 }
 </script>
 </body>
