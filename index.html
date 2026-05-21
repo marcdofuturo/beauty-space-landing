@@ -67,6 +67,17 @@
     .delay-1 { transition-delay: 0.1s; }
     .delay-2 { transition-delay: 0.2s; }
 
+    /* Button Animations (Pegada Tecnológica) */
+    .btn-bounce {
+      opacity: 0;
+      transform: scale(0.5) translateY(20px);
+      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-bounce.active {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
     /* Nav */
     .nav {
       position: fixed;
@@ -133,16 +144,36 @@
       color: #000;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Shine effect */
+    .button::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(45deg);
+      animation: shine 4s infinite cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      15%, 100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
     }
     .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px var(--green-glow);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 30px var(--green-glow);
       background: #55f18c;
     }
     .button.secondary {
       background: rgba(255, 255, 255, 0.05);
       color: var(--ink);
       border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .button.secondary::after {
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
     }
     .button.secondary:hover {
       background: rgba(255, 255, 255, 0.1);
@@ -330,22 +361,22 @@
       border-top: 1px solid var(--line);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
     }
     .sim-btn {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #fff;
-      padding: 10px;
+      padding: 8px 10px;
       border-radius: 8px;
-      font-size: 13px;
+      font-size: 12px;
       font-family: var(--font-body);
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
-    .sim-btn:hover { background: rgba(255, 255, 255, 0.12); }
-    .sim-btn.full { grid-column: span 2; background: rgba(45, 212, 191, 0.15); border-color: rgba(45, 212, 191, 0.3); color: var(--teal); }
-    .sim-btn.full:hover { background: rgba(45, 212, 191, 0.25); }
+    .sim-btn:hover { background: rgba(255, 255, 255, 0.12); transform: translateY(-1px); }
+    .sim-btn.primary { background: rgba(45, 212, 191, 0.15); border-color: rgba(45, 212, 191, 0.3); color: var(--teal); }
+    .sim-btn.primary:hover { background: rgba(45, 212, 191, 0.25); }
 
     /* Sections */
     section { padding: 100px clamp(20px, 5vw, 60px); }
@@ -515,9 +546,9 @@
     .plan h3 { font-size: 28px; margin: 0 0 8px; }
     .plan p { color: var(--muted); margin: 0 0 24px; font-size: 15px; }
     .plan ul {
-      padding: 0; margin: 0 0 32px; list-style: none; display: grid; gap: 16px; color: var(--ink); flex-grow: 1;
+      padding: 0; margin: 0 0 32px; list-style: none; display: grid; gap: 14px; color: var(--ink); flex-grow: 1;
     }
-    .plan li { display: flex; gap: 12px; align-items: flex-start; }
+    .plan li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; }
     .plan li::before {
       content: '✦'; color: var(--teal); font-size: 14px; margin-top: 2px;
     }
@@ -571,7 +602,7 @@
       <a href="#implantacao">Como Funciona</a>
       <a href="#planos">Planos</a>
     </nav>
-    <a class="button" href="https://wa.me/5511970416135?text=Quero%20automatizar%20meu%20negócio%20com%20a%20Lucya">Falar no WhatsApp</a>
+    <a class="button btn-bounce" href="https://wa.me/5511970416135?text=Quero%20automatizar%20meu%20negócio%20com%20a%20Lucya">Falar no WhatsApp</a>
   </header>
 
   <main id="top">
@@ -585,8 +616,8 @@
           <h1>A Lucya atende, agenda e acompanha seus clientes.</h1>
           <p class="lead">A solução ideal para empresas que dependem da agenda: atendimento automatizado e humano, controle inteligente de folgas, lembretes pontuais e total proteção dos seus dados.</p>
           <div class="actions">
-            <a class="button" href="#planos">Começar Agora</a>
-            <a class="button secondary" href="#implantacao">Como Funciona</a>
+            <a class="button btn-bounce delay-1" href="#planos">Começar Agora</a>
+            <a class="button secondary btn-bounce delay-2" href="#implantacao">Como Funciona</a>
           </div>
         </div>
 
@@ -594,7 +625,7 @@
           <div class="sim-header">
             <div class="sim-avatar">L</div>
             <div class="sim-info">
-              <h4>Lucya Assistente</h4>
+              <h4>Lucya | Assessora</h4>
               <p><span class="pulse" style="width:6px;height:6px;box-shadow:none;animation:none;"></span> Online</p>
             </div>
           </div>
@@ -606,7 +637,10 @@
           <div class="sim-actions">
             <button class="sim-btn" onclick="simulateAdmin('status')">Verificar Status</button>
             <button class="sim-btn" onclick="simulateAdmin('agenda')">Minha Agenda</button>
-            <button class="sim-btn full" onclick="simulateAdmin('bloqueio')">Bloquear Quinta-feira</button>
+            <button class="sim-btn primary" onclick="simulateAdmin('reagendar')">Reagendar Cliente</button>
+            <button class="sim-btn" onclick="simulateAdmin('lembretes')">Últimos Lembretes</button>
+            <button class="sim-btn primary" onclick="simulateAdmin('disparo')">Disparar Promoção</button>
+            <button class="sim-btn" onclick="simulateAdmin('bloqueio')">Bloquear Quinta</button>
           </div>
         </div>
       </div>
@@ -691,7 +725,7 @@
           </div>
           <div class="step reveal delay-1">
             <h3>Conexão do WhatsApp</h3>
-            <p>Conectamos o seu número atual facilmente via QR Code ou vinculamos à API Oficial do WhatsApp Business.</p>
+            <p>Conexão rápida e 100% segura utilizando a API Oficial do WhatsApp. Processo simplificado e com sistema de contingência avançado para garantir que sua empresa nunca fique fora do ar.</p>
           </div>
           <div class="step reveal delay-2">
             <h3>Isolamento de Dados</h3>
@@ -722,74 +756,69 @@
       </div>
     </section>
 
-    <section class="band">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <h2>Ideal para Empresas que Dependem de Horários</h2>
-          <p>Clínicas de estética, consultórios médicos, salões de beleza, estúdios, cursos e serviços que valorizam o tempo e a organização.</p>
-        </div>
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-          <article class="card reveal">
-            <h3>Atendimento Sob Medida</h3>
-            <p>Acolhimento imediato de novos contatos, apresentação educada do catálogo e triagem direcionada para os responsáveis.</p>
-          </article>
-          <article class="card reveal delay-1">
-            <h3>Gestão Sem Complicações</h3>
-            <p>Faça bloqueios de feriados, reagende clientes e dispare avisos úteis sem a necessidade de planilhas confusas.</p>
-          </article>
-          <article class="card reveal delay-2">
-            <h3>Vigilância 24 Horas</h3>
-            <p>Nossos servidores monitoram a estabilidade do seu WhatsApp a cada segundo, não deixando nenhum cliente sem retorno.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section id="planos">
       <div class="wrap">
         <div class="section-head reveal">
           <h2>Nossos Planos</h2>
-          <p>Modelos ideais para o tamanho atual e para o futuro da sua empresa, sempre com foco em previsibilidade e suporte ágil.</p>
+          <p>Muitas ferramentas à sua disposição. Nossas soluções evoluem e crescem de acordo com o plano escolhido, trazendo total previsibilidade e resultados rápidos.</p>
         </div>
         
         <div class="plans">
           <article class="plan reveal">
             <h3>Essencial</h3>
             <p>Para quem está começando e deseja profissionalizar o atendimento diário.</p>
-            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px;">Sob consulta</div>
+            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px;">R$ 349,97 <span style="font-size: 16px; font-weight: 400; color: var(--muted);">/mês</span></div>
             <ul>
-              <li>1 Estabelecimento conectado</li>
-              <li>Atendimento humanizado com IA</li>
-              <li>Agendamento autônomo</li>
-              <li>Alertas essenciais no seu celular</li>
+              <li>Atendimento Humanizado 24h com IA</li>
+              <li>Agendamento 100% Autônomo</li>
+              <li>Confirmação Automática de Presença</li>
+              <li>Envio de Lembretes Diários</li>
+              <li>Até 500 disparos (campanhas) por mês</li>
+              <li>1 Estabelecimento / Agenda conectada</li>
+              <li>Alertas Básicos para a Gerência</li>
+              <li>Suporte em Horário Comercial</li>
+              <li>Setup Gratuito Simplificado</li>
+              <li>Conexão Estável Protegida</li>
             </ul>
-            <a class="button secondary" href="https://wa.me/5511970416135?text=Olá,%20gostaria%20de%20saber%20o%20valor%20do%20plano%20Essencial">Consultar Valor</a>
+            <a class="button secondary btn-bounce" href="https://wa.me/5511970416135?text=Olá,%20gostaria%20de%20saber%20mais%20do%20plano%20Essencial">Quero este</a>
           </article>
           
           <article class="plan featured reveal delay-1">
             <h3>Avançado</h3>
-            <p>Para negócios consolidados que buscam controle de faltas e campanhas.</p>
-            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px; color: var(--green);">Sob consulta</div>
+            <p>Para negócios consolidados que buscam controle total e relacionamento estratégico.</p>
+            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px; color: var(--green);">R$ 597,97 <span style="font-size: 16px; font-weight: 400; color: rgba(74,222,128,0.7);">/mês</span></div>
             <ul>
-              <li>Controle de folgas e bloqueios</li>
-              <li>Lembretes automáticos de retorno</li>
-              <li>Disparos de promoções organizados</li>
-              <li>Comandos via WhatsApp do Gestor</li>
+              <li>Todas as 10 funções do plano Essencial</li>
+              <li>Controle Ativo de Folgas e Bloqueios</li>
+              <li>Reagendamento Inteligente com 1 clique</li>
+              <li>Até 1.000 disparos (campanhas) por mês</li>
+              <li>Fila Segura de Mensagens com Histórico</li>
+              <li>Comandos Administrativos pelo WhatsApp</li>
+              <li>Acompanhamento Pós-Venda (Retorno)</li>
+              <li>Alertas de Radar (Interesse VIP)</li>
+              <li>Painel de Métricas Essenciais</li>
+              <li>Suporte Prioritário</li>
             </ul>
-            <a class="button" href="https://wa.me/5511970416135?text=Olá,%20gostaria%20de%20saber%20o%20valor%20do%20plano%20Avançado">Quero este</a>
+            <a class="button btn-bounce" href="https://wa.me/5511970416135?text=Olá,%20gostaria%20de%20saber%20mais%20do%20plano%20Avançado">Assinar Avançado</a>
           </article>
           
           <article class="plan reveal delay-2">
             <h3>Corporativo</h3>
-            <p>Para grandes clínicas, redes ou marcas com alto fluxo de mensagens.</p>
-            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px;">Sob consulta</div>
+            <p>Para grandes clínicas, redes de franquias ou marcas com altíssimo fluxo.</p>
+            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px;">Sob Consulta</div>
             <ul>
-              <li>Múltiplas unidades integradas</li>
-              <li>Conexão API Oficial (WhatsApp Cloud)</li>
-              <li>Monitoramento de estabilidade prioritário</li>
-              <li>Suporte VIP e Implantação dedicada</li>
+              <li>Todas as 20 funções dos planos anteriores</li>
+              <li>Disparos de Campanhas Ilimitados / +1.000</li>
+              <li>Múltiplas Unidades e Filiais Integradas</li>
+              <li>API Oficial Dedicada e Alta Vazão</li>
+              <li>Sistema de Contingência Anti-Queda</li>
+              <li>Relatórios Personalizados Avançados</li>
+              <li>Gestão Unificada de Agendas</li>
+              <li>Integração Customizada com seu CRM/ERP</li>
+              <li>Suporte VIP 24 Horas</li>
+              <li>Implantação e Consultoria Exclusiva</li>
             </ul>
-            <a class="button secondary" href="https://wa.me/5511970416135?text=Olá,%20preciso%20de%20um%20projeto%20Corporativo">Solicitar Estudo</a>
+            <a class="button secondary btn-bounce" href="https://wa.me/5511970416135?text=Olá,%20preciso%20de%20um%20projeto%20Corporativo">Solicitar Estudo</a>
           </article>
         </div>
       </div>
@@ -799,7 +828,7 @@
       <div class="wrap">
         <h2>Seu cliente entra em contato. A Lucya faz todo o resto.</h2>
         <p>Ela responde dúvidas, apresenta horários, confirma na agenda e envia os lembretes, trazendo tranquilidade para você focar apenas em realizar o seu trabalho com maestria.</p>
-        <a class="button" style="font-size: 18px; padding: 0 32px; height: 56px;" href="https://wa.me/5511970416135?text=Quero%20automatizar%20meu%20negócio%20com%20a%20Lucya">Quero Automatizar Meu Negócio</a>
+        <a class="button btn-bounce" style="font-size: 18px; padding: 0 32px; height: 56px;" href="https://wa.me/5511970416135?text=Quero%20automatizar%20meu%20negócio%20com%20a%20Lucya">Quero Automatizar Meu Negócio</a>
       </div>
     </section>
   </main>
@@ -813,7 +842,7 @@
   </footer>
 
   <script>
-    // Reveal Animations on Scroll
+    // Reveal & Bounce Animations on Scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -822,7 +851,7 @@
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal, .btn-bounce').forEach(el => observer.observe(el));
 
     // Interactive Hover effect on Cards
     document.querySelectorAll('.card').forEach(card => {
@@ -853,13 +882,22 @@
 
       if(action === 'status') {
         promptText = "Gerente: Qual o status do sistema hoje?";
-        replyText = "Tudo rodando perfeitamente! Canal principal online e pronto para atender seus clientes.";
+        replyText = "Tudo rodando perfeitamente! Conexão oficial 100% estável e pronta para atender seus clientes.";
       } else if (action === 'agenda') {
         promptText = "Gerente: Como está a minha agenda de hoje?";
         replyText = "Você tem 4 clientes agendados para a tarde. O próximo é a Mariana às 14h.";
       } else if (action === 'bloqueio') {
         promptText = "Gerente: Quero bloquear minha agenda na quinta à tarde.";
         replyText = "Pronto! A tarde de quinta-feira foi bloqueada. Não aceitarei mais agendamentos para esse período.";
+      } else if (action === 'reagendar') {
+        promptText = "Gerente: Preciso reagendar a Mariana que vinha hoje.";
+        replyText = "Certo! Encontrei o agendamento da Mariana. Posso sugerir novos horários para ela na próxima sexta?";
+      } else if (action === 'disparo') {
+        promptText = "Gerente: Iniciar campanha de Dia das Mães.";
+        replyText = "Iniciando disparo para 500 clientes da sua base. Você poderá acompanhar a entrega em tempo real.";
+      } else if (action === 'lembretes') {
+        promptText = "Gerente: Resumo dos lembretes de hoje.";
+        replyText = "Foram enviados 12 lembretes de consulta. 10 clientes já confirmaram presença e 2 solicitaram reagendamento automático.";
       }
 
       appendMessage(promptText, 'in');
@@ -871,7 +909,7 @@
       setTimeout(() => {
         indicator.style.display = 'none';
         appendMessage(replyText, 'out');
-      }, 1500);
+      }, 1800);
     }
 
     // Dynamic Background Particles
