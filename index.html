@@ -3,82 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lucya - Assistente IA para WhatsApp e agendamentos</title>
-  <meta name="description" content="Lucya e a assistente IA multi-tenant para WhatsApp: atendimento, agenda, bloqueios, reagendamentos, follow-ups, campanhas, auditoria e fallback para Meta API.">
-  <meta property="og:title" content="Lucya - sua assistente IA no WhatsApp">
-  <meta property="og:description" content="Atendimento 24/7, agenda inteligente, campanhas com limite, logs reais e seguranca multi-tenant.">
+  <title>Lucya — A Inteligência Artificial que Atende e Agenda seus Clientes no WhatsApp</title>
+  <meta name="description" content="Lucya é a assistente inteligente que atende seus clientes, organiza sua agenda e envia lembretes automáticos no WhatsApp, 24 horas por dia.">
+  <meta property="og:title" content="Lucya — sua assistente IA no WhatsApp">
+  <meta property="og:description" content="Atendimento humanizado 24h, agendamento autônomo, controle inteligente de folgas e total segurança de dados.">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#07110f">
+  <meta name="theme-color" content="#050C0A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       color-scheme: dark;
-      --bg: #07110f;
-      --ink: #f6fbf8;
-      --muted: #a7b8b0;
-      --line: rgba(255,255,255,.14);
-      --panel: rgba(255,255,255,.07);
-      --green: #55d487;
-      --teal: #53d8ce;
-      --coral: #ff8b68;
-      --blue: #8eb7ff;
-      --yellow: #ffd36a;
-      --dark: #0d1916;
-      --max: 1180px;
+      --bg: #050c0a;
+      --bg-light: #0a1411;
+      --ink: #f8fafc;
+      --muted: #94a3b8;
+      --line: rgba(255, 255, 255, 0.08);
+      --panel: rgba(255, 255, 255, 0.03);
+      --glass: rgba(10, 20, 17, 0.6);
+      --green: #4ade80;
+      --green-glow: rgba(74, 222, 128, 0.3);
+      --teal: #2dd4bf;
+      --blue: #60a5fa;
+      --coral: #f87171;
+      --yellow: #facc15;
+      --max: 1200px;
+      
+      --font-display: 'Outfit', system-ui, sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: var(--font-body);
       color: var(--ink);
       background: var(--bg);
-      line-height: 1.5;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    a { color: inherit; }
+    
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    
+    a { color: inherit; text-decoration: none; }
+    
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+
+    /* Nav */
     .nav {
       position: fixed;
       inset: 0 0 auto 0;
-      z-index: 20;
+      z-index: 50;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px clamp(18px, 4vw, 48px);
-      background: rgba(7,17,15,.82);
+      padding: 16px clamp(20px, 5vw, 60px);
+      background: var(--glass);
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(18px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transition: all 0.3s ease;
     }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .02em; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
     .mark {
-      width: 34px; height: 34px; border-radius: 8px;
-      display: grid; place-items: center;
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
       background: linear-gradient(135deg, var(--green), var(--teal));
-      color: #06100d; font-weight: 900;
+      color: #000;
+      font-weight: 900;
+      font-size: 18px;
+      box-shadow: 0 0 20px var(--green-glow);
     }
-    .nav nav { display: flex; gap: 24px; color: var(--muted); font-size: 14px; }
-    .nav .cta, .button {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-      min-height: 44px; padding: 0 18px; border-radius: 8px;
-      border: 1px solid transparent; text-decoration: none; font-weight: 750;
-      background: var(--green); color: #06100d;
+    .nav nav {
+      display: flex;
+      gap: 32px;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 500;
     }
-    .button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+    .nav nav a {
+      transition: color 0.2s;
+    }
+    .nav nav a:hover {
+      color: var(--ink);
+    }
+    
+    /* Buttons */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      background: var(--green);
+      color: #000;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--green-glow);
+      background: #55f18c;
+    }
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .button.secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    
+    /* Hero */
     .hero {
       position: relative;
-      min-height: 92vh;
-      display: grid;
+      min-height: 100vh;
+      display: flex;
       align-items: center;
+      padding: 140px clamp(20px, 5vw, 60px) 80px;
       overflow: hidden;
-      padding: 120px clamp(18px, 4vw, 48px) 70px;
-      border-bottom: 1px solid var(--line);
     }
-    #scene { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .72; }
-    .hero::after {
-      content: "";
+    #scene {
       position: absolute;
-      inset: auto 0 0 0;
-      height: 45%;
-      background: linear-gradient(180deg, rgba(7,17,15,0), var(--bg));
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
+      z-index: 0;
+    }
+    .hero-glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, rgba(0,0,0,0) 70%);
+      transform: translate(-50%, -50%);
+      z-index: 1;
       pointer-events: none;
     }
     .hero-inner {
@@ -87,168 +183,430 @@
       width: min(var(--max), 100%);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(320px, .78fr);
-      gap: clamp(32px, 6vw, 74px);
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
       align-items: center;
     }
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       color: var(--teal);
-      background: rgba(83,216,206,.08);
-      border: 1px solid rgba(83,216,206,.22);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 13px;
+      background: rgba(45, 212, 191, 0.1);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-family: var(--font-display);
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: 0.05em;
     }
-    .pulse { width: 8px; height: 8px; border-radius: 999px; background: var(--green); box-shadow: 0 0 0 8px rgba(85,212,135,.14); }
+    .pulse {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+      animation: pulse-ring 2s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+    @keyframes pulse-ring {
+      100% { box-shadow: 0 0 0 15px rgba(74, 222, 128, 0); }
+    }
     h1 {
-      margin: 22px 0 18px;
-      max-width: 760px;
-      font-size: clamp(44px, 7vw, 92px);
-      line-height: .94;
-      letter-spacing: 0;
+      margin: 24px 0 20px;
+      font-size: clamp(48px, 6vw, 84px);
+      background: linear-gradient(to right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .lead {
-      max-width: 700px;
-      color: #d5e4dd;
       font-size: clamp(18px, 2vw, 22px);
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 40px;
     }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 40px;
-      max-width: 720px;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
     }
-    .metric {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.06);
-      border-radius: 8px;
-      padding: 16px;
-    }
-    .metric strong { display: block; font-size: 24px; color: var(--ink); }
-    .metric span { display: block; color: var(--muted); font-size: 13px; margin-top: 4px; }
-    .product {
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(7,17,15,.78);
-      border-radius: 8px;
+    
+    /* Interactive Simulator */
+    .simulator {
+      position: relative;
+      background: rgba(20, 30, 26, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 24px 80px rgba(0,0,0,.36);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+      transition: transform 0.5s ease;
     }
-    .product-top { display: flex; gap: 7px; padding: 13px; border-bottom: 1px solid var(--line); }
-    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--coral); }
-    .dot:nth-child(2) { background: var(--yellow); }
-    .dot:nth-child(3) { background: var(--green); }
-    .screen { padding: 18px; display: grid; gap: 12px; }
-    .row { display: grid; grid-template-columns: 88px 1fr 74px; gap: 10px; align-items: center; padding: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; font-size: 13px; }
-    .status { color: var(--green); font-weight: 800; }
-    .tag { color: #07110f; background: var(--teal); padding: 4px 8px; border-radius: 6px; font-weight: 800; text-align: center; }
-    .chat { display: grid; gap: 10px; margin-top: 6px; }
-    .bubble { max-width: 92%; border-radius: 8px; padding: 12px; font-size: 14px; }
-    .bubble.in { background: rgba(142,183,255,.14); border: 1px solid rgba(142,183,255,.22); }
-    .bubble.out { background: rgba(85,212,135,.14); border: 1px solid rgba(85,212,135,.24); margin-left: auto; }
-    section { padding: 82px clamp(18px, 4vw, 48px); }
+    .simulator:hover {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    }
+    .sim-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid var(--line);
+    }
+    .sim-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      display: grid; place-items: center;
+      font-weight: bold; color: #fff;
+    }
+    .sim-info h4 { margin: 0; font-size: 16px; color: #fff; }
+    .sim-info p { margin: 0; font-size: 12px; color: var(--green); display: flex; align-items: center; gap: 4px; }
+    .sim-body {
+      padding: 24px;
+      height: 380px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    /* Scrollbar invisible */
+    .sim-body::-webkit-scrollbar { width: 0; }
+    
+    .chat-bubble {
+      max-width: 85%;
+      padding: 14px 18px;
+      border-radius: 18px;
+      font-size: 15px;
+      line-height: 1.4;
+      animation: popIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    @keyframes popIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .chat-bubble.in {
+      background: rgba(255, 255, 255, 0.08);
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+    }
+    .chat-bubble.out {
+      background: rgba(74, 222, 128, 0.15);
+      color: #e2fce9;
+      border: 1px solid rgba(74, 222, 128, 0.2);
+      border-bottom-right-radius: 4px;
+      align-self: flex-end;
+    }
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      width: fit-content;
+      align-self: flex-start;
+      display: none;
+    }
+    .typing-indicator span {
+      width: 6px; height: 6px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: typeDot 1.4s infinite ease-in-out both;
+    }
+    .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes typeDot {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+    
+    .sim-actions {
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .sim-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .sim-btn:hover { background: rgba(255, 255, 255, 0.12); }
+    .sim-btn.full { grid-column: span 2; background: rgba(45, 212, 191, 0.15); border-color: rgba(45, 212, 191, 0.3); color: var(--teal); }
+    .sim-btn.full:hover { background: rgba(45, 212, 191, 0.25); }
+
+    /* Sections */
+    section { padding: 100px clamp(20px, 5vw, 60px); }
     .wrap { width: min(var(--max), 100%); margin: 0 auto; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
-    h2 { margin: 0; font-size: clamp(32px, 4vw, 54px); line-height: 1; letter-spacing: 0; }
-    .section-head p { max-width: 560px; color: var(--muted); margin: 0; }
-    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    
+    .section-head {
+      margin-bottom: 60px;
+      text-align: center;
+      max-width: 800px;
+      margin-inline: auto;
+    }
+    .section-head h2 {
+      font-size: clamp(36px, 5vw, 56px);
+      margin-bottom: 20px;
+    }
+    .section-head p {
+      font-size: 18px;
+      color: var(--muted);
+    }
+    
+    /* Features Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
     .card {
-      border: 1px solid var(--line);
       background: var(--panel);
-      border-radius: 8px;
-      padding: 22px;
-      min-height: 206px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
     }
-    .icon { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; background: rgba(255,255,255,.08); margin-bottom: 18px; font-weight: 900; color: var(--teal); }
-    .card h3 { margin: 0 0 10px; font-size: 20px; }
-    .card p { margin: 0; color: var(--muted); }
-    .band { background: #f3f8f5; color: #07110f; }
-    .band .section-head p, .band .card p { color: #50645b; }
-    .band .card { background: #fff; border-color: #d8e3dd; }
-    .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; counter-reset: step; }
-    .step { border-left: 3px solid var(--green); background: #fff; padding: 18px; border-radius: 8px; min-height: 180px; counter-increment: step; }
-    .step::before { content: "0" counter(step); display: block; font-weight: 900; color: #15874a; margin-bottom: 20px; }
-    .security { display: grid; grid-template-columns: .9fr 1.1fr; gap: 18px; align-items: stretch; }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 100%;
+      background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .card:hover::before { opacity: 1; }
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: rgba(45, 212, 191, 0.1);
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      color: var(--teal);
+      display: grid; place-items: center;
+      font-size: 20px; font-weight: 900; font-family: var(--font-display);
+      margin-bottom: 24px;
+    }
+    .card h3 {
+      font-size: 22px;
+      margin: 0 0 12px;
+      color: #fff;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Steps */
+    .band {
+      background: #08110e;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      counter-reset: step;
+    }
+    .step {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 32px;
+      position: relative;
+      counter-increment: step;
+      transition: transform 0.3s;
+    }
+    .step:hover { transform: translateY(-5px); }
+    .step::before {
+      content: "0" counter(step);
+      display: block;
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.05);
+      position: absolute;
+      top: 20px; right: 24px;
+    }
+    .step h3 { font-size: 20px; margin-bottom: 12px; color: var(--green); }
+    .step p { color: var(--muted); font-size: 15px; margin: 0; }
+
+    /* Security */
+    .security {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
     .lock {
-      border: 1px solid rgba(85,212,135,.26);
-      background: linear-gradient(145deg, rgba(85,212,135,.16), rgba(83,216,206,.06));
-      border-radius: 8px;
-      padding: 28px;
+      background: linear-gradient(145deg, rgba(45, 212, 191, 0.1), rgba(0,0,0,0));
+      border: 1px solid rgba(45, 212, 191, 0.2);
+      border-radius: 32px;
+      padding: 48px;
+      box-shadow: 0 0 80px rgba(45, 212, 191, 0.05);
     }
-    .checklist { display: grid; gap: 10px; }
-    .check { display: flex; gap: 10px; padding: 13px; background: rgba(255,255,255,.07); border: 1px solid var(--line); border-radius: 8px; color: #dcebe4; }
-    .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-    .plan { border: 1px solid var(--line); border-radius: 8px; padding: 24px; background: var(--panel); }
-    .plan.featured { border-color: rgba(85,212,135,.55); background: rgba(85,212,135,.1); }
-    .plan h3 { margin: 0 0 6px; font-size: 24px; }
-    .price { font-size: 36px; font-weight: 900; margin: 16px 0 12px; }
-    .plan ul { padding: 0; margin: 18px 0 24px; list-style: none; display: grid; gap: 10px; color: var(--muted); }
-    .plan li::before { content: ">"; color: var(--green); font-weight: 900; margin-right: 8px; }
-    .final { text-align: center; padding-bottom: 96px; }
-    .final p { max-width: 650px; margin: 16px auto 28px; color: var(--muted); font-size: 18px; }
-    footer { border-top: 1px solid var(--line); padding: 28px clamp(18px,4vw,48px); color: var(--muted); }
-    footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .checklist { display: grid; gap: 16px; }
+    .check {
+      display: flex; gap: 16px; align-items: center;
+      padding: 20px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--ink);
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .check:hover { background: rgba(255,255,255,0.06); }
+    .check::before {
+      content: '✓';
+      display: grid; place-items: center;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #000;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* Plans */
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      align-items: stretch;
+    }
+    .plan {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s;
+    }
+    .plan:hover { transform: translateY(-8px); }
+    .plan.featured {
+      background: linear-gradient(180deg, rgba(74, 222, 128, 0.08), transparent);
+      border-color: rgba(74, 222, 128, 0.4);
+      box-shadow: 0 20px 40px rgba(74, 222, 128, 0.05);
+    }
+    .plan h3 { font-size: 28px; margin: 0 0 8px; }
+    .plan p { color: var(--muted); margin: 0 0 24px; font-size: 15px; }
+    .plan ul {
+      padding: 0; margin: 0 0 32px; list-style: none; display: grid; gap: 16px; color: var(--ink); flex-grow: 1;
+    }
+    .plan li { display: flex; gap: 12px; align-items: flex-start; }
+    .plan li::before {
+      content: '✦'; color: var(--teal); font-size: 14px; margin-top: 2px;
+    }
+    .plan .button { width: 100%; margin-top: auto; }
+
+    /* Final CTA */
+    .final {
+      text-align: center;
+      padding: 120px 20px;
+      background: linear-gradient(0deg, #08110e, var(--bg));
+    }
+    .final h2 {
+      font-size: clamp(40px, 6vw, 64px);
+      max-width: 800px; margin: 0 auto 24px;
+    }
+    .final p {
+      font-size: 20px; color: var(--muted);
+      max-width: 600px; margin: 0 auto 40px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 40px 20px;
+      color: var(--muted);
+      background: #050a08;
+    }
+    footer .wrap {
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+    }
+
     @media (max-width: 900px) {
       .nav nav { display: none; }
       .hero-inner, .security { grid-template-columns: 1fr; }
-      .product { max-width: 560px; }
-      .grid, .steps, .plans, .metrics { grid-template-columns: 1fr; }
-      .section-head { display: block; }
-      .section-head p { margin-top: 14px; }
-      h1 { font-size: clamp(42px, 13vw, 68px); }
+      .simulator { max-width: 500px; margin: 0 auto; }
+      .hero { padding-top: 120px; text-align: center; }
+      .actions { justify-content: center; }
+      .eyebrow { margin: 0 auto; }
+      h1 { font-size: 42px; }
+      .lead { margin-inline: auto; }
+      .section-head { text-align: center; }
     }
   </style>
 </head>
 <body>
+
   <header class="nav">
     <a class="brand" href="#top" aria-label="Lucya"><span class="mark">L</span><span>Lucya</span></a>
-    <nav aria-label="Navegacao principal">
-      <a href="#servicos">Servicos</a>
-      <a href="#seguranca">Seguranca</a>
-      <a href="#implantacao">Implantacao</a>
+    <nav aria-label="Navegação principal">
+      <a href="#servicos">Benefícios</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#implantacao">Como Funciona</a>
       <a href="#planos">Planos</a>
     </nav>
-    <a class="cta" href="https://wa.me/5511970416135?text=Quero%20implantar%20a%20Lucya">Falar no WhatsApp</a>
+    <a class="button" href="https://wa.me/5511970416135?text=Quero%20automatizar%20meu%20negócio%20com%20a%20Lucya">Falar no WhatsApp</a>
   </header>
 
   <main id="top">
     <section class="hero">
       <canvas id="scene" aria-hidden="true"></canvas>
+      <div class="hero-glow"></div>
+      
       <div class="hero-inner">
-        <div>
-          <span class="eyebrow"><span class="pulse"></span> Assistente IA multi-tenant para WhatsApp</span>
-          <h1>A Lucya atende, agenda e acompanha cada cliente.</h1>
-          <p class="lead">Um SaaS para negocios que dependem do WhatsApp e da agenda: atendimento guiado por IA, confirmacao antes de agendar, bloqueios de indisponibilidade, follow-ups, campanhas com quota, logs reais de envio e isolamento completo por tenant.</p>
+        <div class="reveal">
+          <span class="eyebrow"><span class="pulse"></span> Inteligência Artificial para Agendamentos</span>
+          <h1>A Lucya atende, agenda e acompanha seus clientes.</h1>
+          <p class="lead">A solução ideal para empresas que dependem da agenda: atendimento automatizado e humano, controle inteligente de folgas, lembretes pontuais e total proteção dos seus dados.</p>
           <div class="actions">
-            <a class="button" href="#planos">Ver planos</a>
-            <a class="button secondary" href="#implantacao">Como funciona</a>
-          </div>
-          <div class="metrics" aria-label="Destaques">
-            <div class="metric"><strong>24/7</strong><span>Atendimento com memoria e contexto</span></div>
-            <div class="metric"><strong>365d</strong><span>Agenda aberta ate 1 ano</span></div>
-            <div class="metric"><strong>Logs</strong><span>Cada envio com origem e tentativa</span></div>
+            <a class="button" href="#planos">Começar Agora</a>
+            <a class="button secondary" href="#implantacao">Como Funciona</a>
           </div>
         </div>
 
-        <div class="product" aria-label="Previa do painel Lucya">
-          <div class="product-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-          <div class="screen">
-            <div class="row"><strong>Beauty Space</strong><span class="status">Evolution online</span><span class="tag">ativo</span></div>
-            <div class="row"><strong>Meta API</strong><span>fallback preparado</span><span class="tag">standby</span></div>
-            <div class="row"><strong>Agenda</strong><span>2 proximos agendamentos</span><span class="tag">ok</span></div>
-            <div class="chat">
-              <div class="bubble in">Cliente: Quero fazer drenagem na sexta.</div>
-              <div class="bubble out">Lucya: Posso te oferecer sexta 14h, 15h ou 16h. Qual prefere?</div>
-              <div class="bubble in">Admin: status whatsapp</div>
-              <div class="bubble out">Lucya: Evolution online. Meta Cloud pronta para ativar com credenciais.</div>
+        <div class="simulator reveal delay-1" aria-label="Simulador de Conversa">
+          <div class="sim-header">
+            <div class="sim-avatar">L</div>
+            <div class="sim-info">
+              <h4>Lucya Assistente</h4>
+              <p><span class="pulse" style="width:6px;height:6px;box-shadow:none;animation:none;"></span> Online</p>
             </div>
+          </div>
+          <div class="sim-body" id="chatBody">
+            <div class="chat-bubble in">Olá! Gostaria de marcar uma drenagem para sexta-feira.</div>
+            <div class="chat-bubble out">Claro! Tenho horários disponíveis na sexta às 14h, 15h ou 16h. Qual fica melhor para você?</div>
+            <div class="typing-indicator" id="typingIndicator"><span></span><span></span><span></span></div>
+          </div>
+          <div class="sim-actions">
+            <button class="sim-btn" onclick="simulateAdmin('status')">Verificar Status</button>
+            <button class="sim-btn" onclick="simulateAdmin('agenda')">Minha Agenda</button>
+            <button class="sim-btn full" onclick="simulateAdmin('bloqueio')">Bloquear Quinta-feira</button>
           </div>
         </div>
       </div>
@@ -256,193 +614,321 @@
 
     <section id="servicos">
       <div class="wrap">
-        <div class="section-head">
-          <h2>Servicos que a Lucya entrega</h2>
-          <p>A plataforma nao e um chatbot generico. Ela combina atendimento, operacao, banco de dados, agenda, logs e monitoramento para nenhum cliente ficar sem retorno.</p>
+        <div class="section-head reveal">
+          <h2>Tudo o que a Lucya faz pela sua Empresa</h2>
+          <p>Mais do que um atendente robótico: uma solução completa que integra acolhimento, gestão da agenda e relatórios em tempo real para você não perder mais nenhuma venda.</p>
         </div>
+        
         <div class="grid">
-          <article class="card"><div class="icon">WA</div><h3>Atendimento no WhatsApp</h3><p>Recebe clientes, entende pedidos, apresenta servicos, tira duvidas, identifica pedido de atendente humano e avisa o admin quando precisa de acao.</p></article>
-          <article class="card"><div class="icon">AG</div><h3>Agendamento com confirmacao</h3><p>So cria agendamento depois de confirmacao clara do cliente, evitando marcacoes prematuras e conflito com a propria agenda.</p></article>
-          <article class="card"><div class="icon">BL</div><h3>Bloqueio de agenda</h3><p>Admin pode bloquear periodos de indisponibilidade, informar motivo opcional, revisar clientes afetados, cancelar, avisar e tentar reagendar.</p></article>
-          <article class="card"><div class="icon">365</div><h3>Agenda ate 365 dias</h3><p>Clientes podem pedir horarios de hoje ate um ano a frente, sempre respeitando horarios validos, indisponibilidades e calendario real.</p></article>
-          <article class="card"><div class="icon">DB</div><h3>Lucya como assistente do tenant</h3><p>Admin autorizado consulta agenda, clientes, leads, campanhas, envios, quota, status WhatsApp, bloqueios e incidentes pelo WhatsApp.</p></article>
-          <article class="card"><div class="icon">AL</div><h3>Alertas comerciais</h3><p>Servico nao encontrado, interesse em pacotes, pedido de atendente e lead quente geram alerta para o admin nao perder oportunidade.</p></article>
-          <article class="card"><div class="icon">FU</div><h3>Follow-ups e lembretes</h3><p>Lembretes de agendamento, reagendamento, cancelamento, aniversarios, cadastros incompletos e retomada de conversa ficam rastreados.</p></article>
-          <article class="card"><div class="icon">CP</div><h3>Campanhas com limite</h3><p>Disparos respeitam quota mensal, limite por lote, janela de envio e metricas de aceito, entregue, lido, falha, ativo e inativo.</p></article>
-          <article class="card"><div class="icon">LG</div><h3>Outbox e auditoria</h3><p>Cada mensagem passa por outbox, tentativa, provider usado, origem do workflow, status, erro e historico para nao inventar entrega.</p></article>
-          <article class="card"><div class="icon">FB</div><h3>Evolution + Meta Cloud</h3><p>Evolution opera com WhatsApp App. Meta Cloud API fica preparada como canal oficial ou fallback quando as credenciais estiverem conectadas.</p></article>
-          <article class="card"><div class="icon">HC</div><h3>Health check e reconexao</h3><p>Quando o WhatsApp cai, o sistema registra incidente, tenta reconectar, preserva fila e evita perder clientes que chegaram no periodo offline.</p></article>
-          <article class="card"><div class="icon">MT</div><h3>Multi-tenant seguro</h3><p>Cada tenant tem dados, admins, provedores, agenda, catalogo, limites e logs separados por tenant_id, com bloqueios contra prompt injection.</p></article>
+          <article class="card reveal">
+            <div class="icon">💬</div>
+            <h3>Atendimento Humanizado 24h</h3>
+            <p>Recebe os clientes, entende as necessidades, apresenta seus serviços, tira dúvidas frequentes e transfere para humanos quando necessário.</p>
+          </article>
+          
+          <article class="card reveal delay-1">
+            <div class="icon">📅</div>
+            <h3>Agendamento Inteligente</h3>
+            <p>A Lucya só registra o horário após uma confirmação clara do cliente, eliminando marcações acidentais na sua agenda.</p>
+          </article>
+          
+          <article class="card reveal delay-2">
+            <div class="icon">⛔</div>
+            <h3>Controle de Bloqueios</h3>
+            <p>Bloqueie dias ou horários de forma simples. A Lucya notifica automaticamente os clientes afetados e já sugere novos horários.</p>
+          </article>
+          
+          <article class="card reveal">
+            <div class="icon">📆</div>
+            <h3>Planejamento Anual</h3>
+            <p>Permita que seus clientes garantam horários com até 365 dias de antecedência, respeitando datas festivas e regras de funcionamento.</p>
+          </article>
+          
+          <article class="card reveal delay-1">
+            <div class="icon">📱</div>
+            <h3>Painel no seu Bolso</h3>
+            <p>Consulte sua agenda, feche relatórios e envie comandos administrativos usando o seu próprio WhatsApp pessoal.</p>
+          </article>
+          
+          <article class="card reveal delay-2">
+            <div class="icon">🔔</div>
+            <h3>Radar de Oportunidades</h3>
+            <p>Clientes interessados em serviços premium ou com dúvidas complexas geram alertas imediatos para você fechar a venda.</p>
+          </article>
+          
+          <article class="card reveal">
+            <div class="icon">⏱️</div>
+            <h3>Lembretes Automáticos</h3>
+            <p>Reduza as faltas em até 85% com avisos de confirmação de presença e acompanhamento de retorno (pós-venda).</p>
+          </article>
+          
+          <article class="card reveal delay-1">
+            <div class="icon">🚀</div>
+            <h3>Campanhas Seguras</h3>
+            <p>Envie promoções para sua base de contatos de forma organizada e dentro dos limites seguros do WhatsApp, evitando bloqueios.</p>
+          </article>
+          
+          <article class="card reveal delay-2">
+            <div class="icon">📊</div>
+            <h3>Histórico Transparente</h3>
+            <p>Acompanhe exatamente quando cada mensagem foi enviada, se foi entregue, lida pelo cliente ou se houve oscilação de sinal.</p>
+          </article>
         </div>
       </div>
     </section>
 
     <section class="band" id="implantacao">
       <div class="wrap">
-        <div class="section-head">
-          <h2>Implantacao em escala</h2>
-          <p>Cada cliente entra como tenant separado: numero, agenda, catalogo, admin, limites, provedores e logs proprios.</p>
+        <div class="section-head reveal">
+          <h2>Como Funciona a Ativação</h2>
+          <p>Sua empresa configurada de forma independente e segura, pronta para faturar mais em poucos passos.</p>
         </div>
+        
         <div class="steps">
-          <div class="step"><h3>Dados do tenant</h3><p>Nome, telefone, admins, servicos, horarios, unidade, regras, Google Calendar e limites de disparo.</p></div>
-          <div class="step"><h3>Canais WhatsApp</h3><p>Evolution para uso com WhatsApp App e Meta Cloud API preparada para fallback/coexistencia.</p></div>
-          <div class="step"><h3>Banco isolado</h3><p>Contatos, agenda, campanhas e outbox filtrados por tenant_id em toda operacao sensivel.</p></div>
-          <div class="step"><h3>Validacao</h3><p>Smoke de atendimento, admin, agenda, notificacoes, follow-up, bloqueios, quota, falhas e isolamento.</p></div>
+          <div class="step reveal">
+            <h3>Configuração Inicial</h3>
+            <p>Cadastramos seus dados, horários de atendimento, regras da casa, catálogo de serviços e integramos tudo à sua agenda.</p>
+          </div>
+          <div class="step reveal delay-1">
+            <h3>Conexão do WhatsApp</h3>
+            <p>Conectamos o seu número atual facilmente via QR Code ou vinculamos à API Oficial do WhatsApp Business.</p>
+          </div>
+          <div class="step reveal delay-2">
+            <h3>Isolamento de Dados</h3>
+            <p>Criamos uma célula exclusiva e criptografada para salvar seus clientes e conversas com total privacidade.</p>
+          </div>
+          <div class="step reveal">
+            <h3>Testes e Ativação</h3>
+            <p>Realizamos simulações completas de atendimento e validações de alertas antes de liberar o sistema para o público.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="seguranca">
       <div class="wrap security">
-        <div class="lock">
-          <span class="eyebrow"><span class="pulse"></span> Blindagem multi-tenant</span>
-          <h2>Prompt injection nao pode virar acesso ao banco.</h2>
-          <p class="lead">A Lucya nao executa SQL livre. Comandos admin passam por autenticacao de telefone, permissao do tenant e allowlist de relatorios.</p>
+        <div class="lock reveal">
+          <span class="eyebrow" style="margin-bottom: 20px;"><span class="pulse"></span> Criptografia e Privacidade</span>
+          <h2>Suas informações blindadas contra acessos não autorizados.</h2>
+          <p class="lead" style="margin-top: 20px;">A inteligência opera em um ambiente seguro e isolado. Ela não permite a extração indevida de dados e exige autorização prévia para ações da gerência.</p>
         </div>
         <div class="checklist">
-          <div class="check">Autorizacao por numero admin, tenant_id e permissao ativa.</div>
-          <div class="check">Funcoes sensiveis em schema privado, com RLS nas tabelas de seguranca.</div>
-          <div class="check">Bloqueio de pedidos por tokens, senhas, outros tenants, SQL livre e bypass.</div>
-          <div class="check">Auditoria em admin_audit_logs e admin_security_events.</div>
-          <div class="check">Todos os envios roteados por provider router e outbox.</div>
+          <div class="check reveal delay-1">Acesso permitido apenas para números de gerentes autorizados.</div>
+          <div class="check reveal delay-2">Isolamento completo das conversas e contatos de cada empresa.</div>
+          <div class="check reveal">Filtros que bloqueiam tentativas de invasão e manipulação da IA.</div>
+          <div class="check reveal delay-1">Registro seguro e auditável de todas as ações feitas no sistema.</div>
+          <div class="check reveal delay-2">Validação obrigatória de todas as mensagens antes do envio.</div>
         </div>
       </div>
     </section>
 
     <section class="band">
       <div class="wrap">
-        <div class="section-head">
-          <h2>Para negocios que nao podem perder cliente</h2>
-          <p>Estetica, clinicas, consultorios, cursos, servicos locais e qualquer operacao onde WhatsApp, agenda e retorno rapido definem receita.</p>
+        <div class="section-head reveal">
+          <h2>Ideal para Empresas que Dependem de Horários</h2>
+          <p>Clínicas de estética, consultórios médicos, salões de beleza, estúdios, cursos e serviços que valorizam o tempo e a organização.</p>
         </div>
-        <div class="grid">
-          <article class="card"><h3>Atendimento assistido</h3><p>Qualificacao, explicacao de servicos, orientacao de horarios, pedido de atendente e transferencia para o admin quando necessario.</p></article>
-          <article class="card"><h3>Operacao de agenda</h3><p>Bloqueio de agenda, cancelamento com aviso, reagendamento, lembretes e consultas sem abrir painel.</p></article>
-          <article class="card"><h3>Monitoramento continuo</h3><p>Smoke, incidentes, health check, reconexao, fila preservada e agente operacional para diagnostico.</p></article>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+          <article class="card reveal">
+            <h3>Atendimento Sob Medida</h3>
+            <p>Acolhimento imediato de novos contatos, apresentação educada do catálogo e triagem direcionada para os responsáveis.</p>
+          </article>
+          <article class="card reveal delay-1">
+            <h3>Gestão Sem Complicações</h3>
+            <p>Faça bloqueios de feriados, reagende clientes e dispare avisos úteis sem a necessidade de planilhas confusas.</p>
+          </article>
+          <article class="card reveal delay-2">
+            <h3>Vigilância 24 Horas</h3>
+            <p>Nossos servidores monitoram a estabilidade do seu WhatsApp a cada segundo, não deixando nenhum cliente sem retorno.</p>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="planos">
       <div class="wrap">
-        <div class="section-head">
-          <h2>Planos</h2>
-          <p>Estrutura pensada para crescer com tenants sem perder controle de custo, envio e suporte.</p>
+        <div class="section-head reveal">
+          <h2>Nossos Planos</h2>
+          <p>Modelos ideais para o tamanho atual e para o futuro da sua empresa, sempre com foco em previsibilidade e suporte ágil.</p>
         </div>
+        
         <div class="plans">
-          <article class="plan">
-            <h3>Start</h3>
-            <p>Para uma operacao com atendimento e agenda essenciais.</p>
-            <div class="price">Sob consulta</div>
+          <article class="plan reveal">
+            <h3>Essencial</h3>
+            <p>Para quem está começando e deseja profissionalizar o atendimento diário.</p>
+            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px;">Sob consulta</div>
             <ul>
-              <li>1 tenant</li>
-              <li>Atendimento WhatsApp guiado</li>
-              <li>Agenda e notificacoes</li>
-              <li>Alertas para o admin</li>
+              <li>1 Estabelecimento conectado</li>
+              <li>Atendimento humanizado com IA</li>
+              <li>Agendamento autônomo</li>
+              <li>Alertas essenciais no seu celular</li>
             </ul>
-            <a class="button secondary" href="https://wa.me/5511970416135?text=Quero%20o%20plano%20Start%20da%20Lucya">Conversar</a>
+            <a class="button secondary" href="https://wa.me/5511970416135?text=Olá,%20gostaria%20de%20saber%20o%20valor%20do%20plano%20Essencial">Consultar Valor</a>
           </article>
-          <article class="plan featured">
-            <h3>Profissional</h3>
-            <p>Para negocios que querem atendimento, agenda e relacionamento com rastreabilidade.</p>
-            <div class="price">Sob consulta</div>
+          
+          <article class="plan featured reveal delay-1">
+            <h3>Avançado</h3>
+            <p>Para negócios consolidados que buscam controle de faltas e campanhas.</p>
+            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px; color: var(--green);">Sob consulta</div>
             <ul>
-              <li>Agenda, bloqueios e follow-up</li>
-              <li>Quota mensal de disparos</li>
-              <li>Outbox e auditoria</li>
-              <li>Admin pelo WhatsApp</li>
+              <li>Controle de folgas e bloqueios</li>
+              <li>Lembretes automáticos de retorno</li>
+              <li>Disparos de promoções organizados</li>
+              <li>Comandos via WhatsApp do Gestor</li>
             </ul>
-            <a class="button" href="https://wa.me/5511970416135?text=Quero%20o%20plano%20Profissional%20da%20Lucya">Quero esse</a>
+            <a class="button" href="https://wa.me/5511970416135?text=Olá,%20gostaria%20de%20saber%20o%20valor%20do%20plano%20Avançado">Quero este</a>
           </article>
-          <article class="plan">
-            <h3>Enterprise</h3>
-            <p>Para multiunidades, agencias e alto volume.</p>
-            <div class="price">Sob consulta</div>
+          
+          <article class="plan reveal delay-2">
+            <h3>Corporativo</h3>
+            <p>Para grandes clínicas, redes ou marcas com alto fluxo de mensagens.</p>
+            <div style="font-size: 36px; font-family: var(--font-display); font-weight: 900; margin-bottom: 20px;">Sob consulta</div>
             <ul>
-              <li>Multi-tenant em escala</li>
-              <li>Fallback Meta Cloud API</li>
-              <li>Monitoramento e incidentes</li>
-              <li>Implantacao assistida</li>
+              <li>Múltiplas unidades integradas</li>
+              <li>Conexão API Oficial (WhatsApp Cloud)</li>
+              <li>Monitoramento de estabilidade prioritário</li>
+              <li>Suporte VIP e Implantação dedicada</li>
             </ul>
-            <a class="button secondary" href="https://wa.me/5511970416135?text=Quero%20um%20estudo%20Enterprise%20da%20Lucya">Solicitar estudo</a>
+            <a class="button secondary" href="https://wa.me/5511970416135?text=Olá,%20preciso%20de%20um%20projeto%20Corporativo">Solicitar Estudo</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="final">
+    <section class="final reveal">
       <div class="wrap">
-        <h2>Seu cliente chama no WhatsApp. A Lucya organiza o atendimento.</h2>
-        <p>Atende, registra, confirma, agenda, avisa, acompanha e mostra para o admin o que aconteceu.</p>
-        <a class="button" href="https://wa.me/5511970416135?text=Quero%20implantar%20a%20Lucya%20no%20meu%20negocio">Implantar a Lucya</a>
+        <h2>Seu cliente entra em contato. A Lucya faz todo o resto.</h2>
+        <p>Ela responde dúvidas, apresenta horários, confirma na agenda e envia os lembretes, trazendo tranquilidade para você focar apenas em realizar o seu trabalho com maestria.</p>
+        <a class="button" style="font-size: 18px; padding: 0 32px; height: 56px;" href="https://wa.me/5511970416135?text=Quero%20automatizar%20meu%20negócio%20com%20a%20Lucya">Quero Automatizar Meu Negócio</a>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <span>Lucya - Tudo do Futuro</span>
-      <span>WhatsApp, agenda, campanhas, logs e IA multi-tenant.</span>
+      <div style="font-family: var(--font-display); font-weight: 800; font-size: 20px; color: #fff;">Lucya</div>
+      <span>Tudo do Futuro © 2026. Todos os direitos reservados.</span>
+      <span>Inteligência Artificial Segura para Negócios Locais.</span>
     </div>
   </footer>
 
   <script>
-    const canvas = document.getElementById('scene');
-    const ctx = canvas.getContext('2d');
-    let w = 0, h = 0, dots = [];
-    const colors = ['#55d487', '#53d8ce', '#8eb7ff', '#ff8b68'];
+    // Reveal Animations on Scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
 
-    function resize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      dots = Array.from({ length: Math.max(42, Math.floor(w / 22)) }, (_, i) => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: 1.5 + Math.random() * 3.5,
-        vx: -.22 + Math.random() * .44,
-        vy: -.18 + Math.random() * .36,
-        c: colors[i % colors.length],
-        a: .18 + Math.random() * .38
-      }));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Interactive Hover effect on Cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // Chat Simulator Logic
+    const chatBody = document.getElementById('chatBody');
+    const indicator = document.getElementById('typingIndicator');
+
+    function appendMessage(text, type) {
+      const div = document.createElement('div');
+      div.className = `chat-bubble ${type}`;
+      div.textContent = text;
+      chatBody.insertBefore(div, indicator);
+      chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    function draw() {
+    function simulateAdmin(action) {
+      let promptText = "";
+      let replyText = "";
+
+      if(action === 'status') {
+        promptText = "Gerente: Qual o status do sistema hoje?";
+        replyText = "Tudo rodando perfeitamente! Canal principal online e pronto para atender seus clientes.";
+      } else if (action === 'agenda') {
+        promptText = "Gerente: Como está a minha agenda de hoje?";
+        replyText = "Você tem 4 clientes agendados para a tarde. O próximo é a Mariana às 14h.";
+      } else if (action === 'bloqueio') {
+        promptText = "Gerente: Quero bloquear minha agenda na quinta à tarde.";
+        replyText = "Pronto! A tarde de quinta-feira foi bloqueada. Não aceitarei mais agendamentos para esse período.";
+      }
+
+      appendMessage(promptText, 'in');
+      
+      // Show typing indicator
+      indicator.style.display = 'flex';
+      chatBody.scrollTop = chatBody.scrollHeight;
+      
+      setTimeout(() => {
+        indicator.style.display = 'none';
+        appendMessage(replyText, 'out');
+      }, 1500);
+    }
+
+    // Dynamic Background Particles
+    const canvas = document.getElementById('scene');
+    const ctx = canvas.getContext('2d');
+    let w, h, particles = [];
+    
+    function initCanvas() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      particles = [];
+      const num = Math.min(Math.floor(w * h / 18000), 100);
+      for(let i=0; i<num; i++){
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          r: Math.random() * 2 + 1
+        });
+      }
+    }
+
+    function drawScene() {
       ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = '#07110f';
-      ctx.fillRect(0, 0, w, h);
-      ctx.strokeStyle = 'rgba(255,255,255,.045)';
-      ctx.lineWidth = 1;
-      for (let x = 0; x < w; x += 64) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
-      }
-      for (let y = 0; y < h; y += 64) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
-      }
-      dots.forEach((p, i) => {
+      ctx.fillStyle = 'rgba(45, 212, 191, 0.5)';
+      
+      particles.forEach((p, i) => {
         p.x += p.vx; p.y += p.vy;
-        if (p.x < -20) p.x = w + 20; if (p.x > w + 20) p.x = -20;
-        if (p.y < -20) p.y = h + 20; if (p.y > h + 20) p.y = -20;
-        ctx.globalAlpha = p.a;
-        ctx.fillStyle = p.c;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
-        for (let j = i + 1; j < dots.length; j++) {
-          const q = dots[j], dx = p.x - q.x, dy = p.y - q.y, dist = Math.hypot(dx, dy);
-          if (dist < 120) {
-            ctx.globalAlpha = (1 - dist / 120) * .13;
-            ctx.strokeStyle = p.c;
-            ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+        if(p.x < 0 || p.x > w) p.vx *= -1;
+        if(p.y < 0 || p.y > h) p.vy *= -1;
+        
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        for(let j=i+1; j<particles.length; j++){
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if(dist < 150) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(45, 212, 191, ${0.15 - dist/1000})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
           }
         }
       });
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(draw);
+      requestAnimationFrame(drawScene);
     }
-    resize(); draw();
-    window.addEventListener('resize', resize, { passive: true });
+
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    drawScene();
   </script>
 </body>
 </html>
