@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lucya - Assistente IA para WhatsApp, agenda e vendas</title>
-  <meta name="description" content="Lucya e a assistente IA multi-tenant para WhatsApp: atendimento, agenda, campanhas, follow-up, auditoria e fallback para Meta API.">
+  <title>Lucya - Assistente IA para WhatsApp e agendamentos</title>
+  <meta name="description" content="Lucya e a assistente IA multi-tenant para WhatsApp: atendimento, agenda, bloqueios, reagendamentos, follow-ups, campanhas, auditoria e fallback para Meta API.">
   <meta property="og:title" content="Lucya - sua assistente IA no WhatsApp">
   <meta property="og:description" content="Atendimento 24/7, agenda inteligente, campanhas com limite, logs reais e seguranca multi-tenant.">
   <meta property="og:type" content="website">
@@ -190,7 +190,7 @@
     .plan h3 { margin: 0 0 6px; font-size: 24px; }
     .price { font-size: 36px; font-weight: 900; margin: 16px 0 12px; }
     .plan ul { padding: 0; margin: 18px 0 24px; list-style: none; display: grid; gap: 10px; color: var(--muted); }
-    .plan li::before { content: "✓"; color: var(--green); font-weight: 900; margin-right: 8px; }
+    .plan li::before { content: ">"; color: var(--green); font-weight: 900; margin-right: 8px; }
     .final { text-align: center; padding-bottom: 96px; }
     .final p { max-width: 650px; margin: 16px auto 28px; color: var(--muted); font-size: 18px; }
     footer { border-top: 1px solid var(--line); padding: 28px clamp(18px,4vw,48px); color: var(--muted); }
@@ -224,8 +224,8 @@
       <div class="hero-inner">
         <div>
           <span class="eyebrow"><span class="pulse"></span> Assistente IA multi-tenant para WhatsApp</span>
-          <h1>A Lucya atende, agenda, vende e protege cada lead.</h1>
-          <p class="lead">Um SaaS para negocios que dependem do WhatsApp: agenda inteligente, follow-ups, campanhas com quota, logs reais de envio, fallback Evolution + Meta Cloud API e isolamento completo por tenant.</p>
+          <h1>A Lucya atende, agenda e acompanha cada cliente.</h1>
+          <p class="lead">Um SaaS para negocios que dependem do WhatsApp e da agenda: atendimento guiado por IA, confirmacao antes de agendar, bloqueios de indisponibilidade, follow-ups, campanhas com quota, logs reais de envio e isolamento completo por tenant.</p>
           <div class="actions">
             <a class="button" href="#planos">Ver planos</a>
             <a class="button secondary" href="#implantacao">Como funciona</a>
@@ -233,7 +233,7 @@
           <div class="metrics" aria-label="Destaques">
             <div class="metric"><strong>24/7</strong><span>Atendimento com memoria e contexto</span></div>
             <div class="metric"><strong>365d</strong><span>Agenda aberta ate 1 ano</span></div>
-            <div class="metric"><strong>100%</strong><span>Mensagens com auditoria e tentativa</span></div>
+            <div class="metric"><strong>Logs</strong><span>Cada envio com origem e tentativa</span></div>
           </div>
         </div>
 
@@ -258,15 +258,21 @@
       <div class="wrap">
         <div class="section-head">
           <h2>Servicos que a Lucya entrega</h2>
-          <p>A plataforma nao e so um bot. Ela combina atendimento, operacao, banco de dados, agenda, logs e monitoramento para nenhum lead ficar perdido.</p>
+          <p>A plataforma nao e um chatbot generico. Ela combina atendimento, operacao, banco de dados, agenda, logs e monitoramento para nenhum cliente ficar sem retorno.</p>
         </div>
         <div class="grid">
-          <article class="card"><div class="icon">WA</div><h3>Atendimento no WhatsApp</h3><p>Responde clientes, qualifica interesse, explica servicos, chama atendente quando pedido e alerta o admin em casos importantes.</p></article>
-          <article class="card"><div class="icon">AG</div><h3>Agenda inteligente</h3><p>Agenda somente depois de confirmacao, respeita horarios, bloqueios, indisponibilidade e janela de ate 365 dias.</p></article>
-          <article class="card"><div class="icon">DB</div><h3>Assistente do tenant</h3><p>Admin autorizado consulta agenda, clientes, leads, campanhas, envios, quota e incidentes direto pelo WhatsApp.</p></article>
-          <article class="card"><div class="icon">LG</div><h3>Logs de envio</h3><p>Cada mensagem passa por outbox, tentativa, provider usado, status, erro, contato e origem do workflow.</p></article>
-          <article class="card"><div class="icon">CP</div><h3>Campanhas com limite</h3><p>Disparos respeitam quota mensal, reserva de fila, limite por lote e metricas de aceito, entregue, lido e falha.</p></article>
-          <article class="card"><div class="icon">FB</div><h3>Fallback de canal</h3><p>Evolution fica como canal principal e Meta Cloud API pode assumir automaticamente quando estiver configurada.</p></article>
+          <article class="card"><div class="icon">WA</div><h3>Atendimento no WhatsApp</h3><p>Recebe clientes, entende pedidos, apresenta servicos, tira duvidas, identifica pedido de atendente humano e avisa o admin quando precisa de acao.</p></article>
+          <article class="card"><div class="icon">AG</div><h3>Agendamento com confirmacao</h3><p>So cria agendamento depois de confirmacao clara do cliente, evitando marcacoes prematuras e conflito com a propria agenda.</p></article>
+          <article class="card"><div class="icon">BL</div><h3>Bloqueio de agenda</h3><p>Admin pode bloquear periodos de indisponibilidade, informar motivo opcional, revisar clientes afetados, cancelar, avisar e tentar reagendar.</p></article>
+          <article class="card"><div class="icon">365</div><h3>Agenda ate 365 dias</h3><p>Clientes podem pedir horarios de hoje ate um ano a frente, sempre respeitando horarios validos, indisponibilidades e calendario real.</p></article>
+          <article class="card"><div class="icon">DB</div><h3>Lucya como assistente do tenant</h3><p>Admin autorizado consulta agenda, clientes, leads, campanhas, envios, quota, status WhatsApp, bloqueios e incidentes pelo WhatsApp.</p></article>
+          <article class="card"><div class="icon">AL</div><h3>Alertas comerciais</h3><p>Servico nao encontrado, interesse em pacotes, pedido de atendente e lead quente geram alerta para o admin nao perder oportunidade.</p></article>
+          <article class="card"><div class="icon">FU</div><h3>Follow-ups e lembretes</h3><p>Lembretes de agendamento, reagendamento, cancelamento, aniversarios, cadastros incompletos e retomada de conversa ficam rastreados.</p></article>
+          <article class="card"><div class="icon">CP</div><h3>Campanhas com limite</h3><p>Disparos respeitam quota mensal, limite por lote, janela de envio e metricas de aceito, entregue, lido, falha, ativo e inativo.</p></article>
+          <article class="card"><div class="icon">LG</div><h3>Outbox e auditoria</h3><p>Cada mensagem passa por outbox, tentativa, provider usado, origem do workflow, status, erro e historico para nao inventar entrega.</p></article>
+          <article class="card"><div class="icon">FB</div><h3>Evolution + Meta Cloud</h3><p>Evolution opera com WhatsApp App. Meta Cloud API fica preparada como canal oficial ou fallback quando as credenciais estiverem conectadas.</p></article>
+          <article class="card"><div class="icon">HC</div><h3>Health check e reconexao</h3><p>Quando o WhatsApp cai, o sistema registra incidente, tenta reconectar, preserva fila e evita perder clientes que chegaram no periodo offline.</p></article>
+          <article class="card"><div class="icon">MT</div><h3>Multi-tenant seguro</h3><p>Cada tenant tem dados, admins, provedores, agenda, catalogo, limites e logs separados por tenant_id, com bloqueios contra prompt injection.</p></article>
         </div>
       </div>
     </section>
@@ -281,7 +287,7 @@
           <div class="step"><h3>Dados do tenant</h3><p>Nome, telefone, admins, servicos, horarios, unidade, regras, Google Calendar e limites de disparo.</p></div>
           <div class="step"><h3>Canais WhatsApp</h3><p>Evolution para uso com WhatsApp App e Meta Cloud API preparada para fallback/coexistencia.</p></div>
           <div class="step"><h3>Banco isolado</h3><p>Contatos, agenda, campanhas e outbox filtrados por tenant_id em toda operacao sensivel.</p></div>
-          <div class="step"><h3>Validacao</h3><p>Smoke de atendimento, admin, agenda, notificacoes, follow-up, bloqueios, quota e falhas.</p></div>
+          <div class="step"><h3>Validacao</h3><p>Smoke de atendimento, admin, agenda, notificacoes, follow-up, bloqueios, quota, falhas e isolamento.</p></div>
         </div>
       </div>
     </section>
@@ -306,13 +312,13 @@
     <section class="band">
       <div class="wrap">
         <div class="section-head">
-          <h2>Para negocios que nao podem desperdiçar lead</h2>
-          <p>Estetica, clinicas, consultorios, cursos, servicos locais, vendas consultivas e qualquer operacao onde WhatsApp e agenda definem receita.</p>
+          <h2>Para negocios que nao podem perder cliente</h2>
+          <p>Estetica, clinicas, consultorios, cursos, servicos locais e qualquer operacao onde WhatsApp, agenda e retorno rapido definem receita.</p>
         </div>
         <div class="grid">
-          <article class="card"><h3>Recuperacao automatica</h3><p>Follow-up de leads quentes, aniversarios, lembretes, no-show e reofertas.</p></article>
-          <article class="card"><h3>Operacao do admin</h3><p>Bloqueio de agenda, cancelamento com aviso, reagendamento e consultas sem abrir painel.</p></article>
-          <article class="card"><h3>Observabilidade</h3><p>Smoke, incidentes, health check, reconexao e agente operacional para diagnostico.</p></article>
+          <article class="card"><h3>Atendimento assistido</h3><p>Qualificacao, explicacao de servicos, orientacao de horarios, pedido de atendente e transferencia para o admin quando necessario.</p></article>
+          <article class="card"><h3>Operacao de agenda</h3><p>Bloqueio de agenda, cancelamento com aviso, reagendamento, lembretes e consultas sem abrir painel.</p></article>
+          <article class="card"><h3>Monitoramento continuo</h3><p>Smoke, incidentes, health check, reconexao, fila preservada e agente operacional para diagnostico.</p></article>
         </div>
       </div>
     </section>
@@ -326,22 +332,22 @@
         <div class="plans">
           <article class="plan">
             <h3>Start</h3>
-            <p>Para validar a assistente em uma operacao enxuta.</p>
+            <p>Para uma operacao com atendimento e agenda essenciais.</p>
             <div class="price">Sob consulta</div>
             <ul>
               <li>1 tenant</li>
-              <li>Atendimento WhatsApp</li>
+              <li>Atendimento WhatsApp guiado</li>
               <li>Agenda e notificacoes</li>
-              <li>Relatorios basicos</li>
+              <li>Alertas para o admin</li>
             </ul>
             <a class="button secondary" href="https://wa.me/5511970416135?text=Quero%20o%20plano%20Start%20da%20Lucya">Conversar</a>
           </article>
           <article class="plan featured">
             <h3>Profissional</h3>
-            <p>Para negocios que querem automacao comercial real.</p>
+            <p>Para negocios que querem atendimento, agenda e relacionamento com rastreabilidade.</p>
             <div class="price">Sob consulta</div>
             <ul>
-              <li>Agenda, campanhas e follow-up</li>
+              <li>Agenda, bloqueios e follow-up</li>
               <li>Quota mensal de disparos</li>
               <li>Outbox e auditoria</li>
               <li>Admin pelo WhatsApp</li>
@@ -355,7 +361,7 @@
             <ul>
               <li>Multi-tenant em escala</li>
               <li>Fallback Meta Cloud API</li>
-              <li>Monitoramento avancado</li>
+              <li>Monitoramento e incidentes</li>
               <li>Implantacao assistida</li>
             </ul>
             <a class="button secondary" href="https://wa.me/5511970416135?text=Quero%20um%20estudo%20Enterprise%20da%20Lucya">Solicitar estudo</a>
@@ -366,7 +372,7 @@
 
     <section class="final">
       <div class="wrap">
-        <h2>Seu cliente manda mensagem. A Lucya assume o processo.</h2>
+        <h2>Seu cliente chama no WhatsApp. A Lucya organiza o atendimento.</h2>
         <p>Atende, registra, confirma, agenda, avisa, acompanha e mostra para o admin o que aconteceu.</p>
         <a class="button" href="https://wa.me/5511970416135?text=Quero%20implantar%20a%20Lucya%20no%20meu%20negocio">Implantar a Lucya</a>
       </div>

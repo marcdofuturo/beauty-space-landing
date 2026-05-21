@@ -1,6 +1,15 @@
 # Lucya Services Site
 
-Static HTML presentation for Lucya.
+Static HTML presentation for Lucya, focused on the current SaaS services:
+
+- WhatsApp assistant for service businesses
+- appointment scheduling with explicit confirmation
+- availability blocks and rescheduling flow
+- tenant admin assistant by WhatsApp
+- follow-ups, reminders and client notifications
+- campaign quota, outbox logs and provider routing
+- Evolution + Meta Cloud API readiness
+- multi-tenant security and auditability
 
 ## Local preview
 
